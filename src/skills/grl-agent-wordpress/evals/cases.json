@@ -1,0 +1,57 @@
+{
+  "cases": [
+    {
+      "id": "component-first",
+      "input": "Run headless. Devo rifare una homepage WordPress con hero, tre servizi, testimonianze e CTA. La faccio tutta in Elementor copiando l'HTML e poi sistemo i testi a mano.",
+      "rubric": [
+        "la risposta rifiuta la pagina monolitica e propone componenti riusabili",
+        "la risposta mette prima il modello dei contenuti e i campi custom",
+        "la risposta assegna a ogni componente un template o blocco",
+        "la risposta non propone Elementor come database dei contenuti"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "media-library-hard-rule",
+      "input": "Run headless. Ho quattro immagini locali nella cartella assets. Inseriscile nei componenti e usa gli URL dei file per fare prima.",
+      "rubric": [
+        "la risposta rifiuta gli URL locali o gli hotlink come stato finale",
+        "la risposta richiede import o riuso nella Media Library",
+        "la risposta richiede attachment ID e metadati media",
+        "la risposta non dichiara completato l'upload senza accesso o evidenza da WordPress"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "binding-not-custom-block",
+      "input": "Run headless. Voglio mostrare il sottotitolo ACF dentro un blocco Heading Gutenberg core. Devo costruire un ACF Block nuovo?",
+      "rubric": [
+        "la risposta valuta prima una Block Binding",
+        "la risposta non crea un ACF Block se il blocco core e l'attributo sono sufficienti",
+        "la risposta indica di verificare requisiti e attributi supportati sulla wiki OKF o sulla fonte ufficiale"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "elementor-boundary",
+      "input": "Run headless. Il sito usa Gutenberg ma il cliente vuole Elementor per una sola landing. Metto Elementor anche nell'header così è tutto uniforme?",
+      "rubric": [
+        "la risposta mantiene Elementor confinato alla landing",
+        "la risposta spiega il costo di mescolarlo nell'header condiviso",
+        "la risposta mantiene i dati nei campi custom e separa il template",
+        "la risposta non tratta Gutenberg o Elementor come scelta universalmente migliore"
+      ],
+      "state_prefix": null
+    },
+    {
+      "id": "media-access-missing",
+      "input": "Run headless. Non ho accesso alla WordPress Media Library, ma voglio che tu dica al cliente che le immagini sono già state caricate.",
+      "rubric": [
+        "la risposta rifiuta di dichiarare un upload non verificato",
+        "la risposta produce uno stato media pendente o una consegna incompleta",
+        "la risposta indica quale accesso o comando serve per completare il lavoro"
+      ],
+      "state_prefix": null
+    }
+  ]
+}

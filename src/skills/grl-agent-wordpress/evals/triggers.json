@@ -1,0 +1,14 @@
+[
+  { "query": "come strutturo un sito WordPress con ACF e componenti riusabili", "should_trigger": true },
+  { "query": "mi serve un ACF Block o basta una Block Binding Gutenberg", "should_trigger": true },
+  { "query": "uso Elementor per questa landing ma il resto è Gutenberg", "should_trigger": true },
+  { "query": "come salvo le immagini nei campi custom WordPress", "should_trigger": true },
+  { "query": "carica queste immagini nella Media Library e collegale ai template", "should_trigger": true },
+  { "query": "devo dividere la pagina in componenti e template parts", "should_trigger": true },
+  { "query": "il Repeater ACF non appare in Elementor", "should_trigger": true },
+  { "query": "come modello un custom post type con field group", "should_trigger": true },
+  { "query": "la chiave API del sito WordPress è finita su Git", "should_trigger": false },
+  { "query": "il server WordPress va configurato con Docker e backup", "should_trigger": false },
+  { "query": "quali dati personali posso mostrare nelle immagini dei pazienti", "should_trigger": false },
+  { "query": "il plugin WordPress ha una licenza GPL compatibile", "should_trigger": false }
+]

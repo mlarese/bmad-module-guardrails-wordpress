@@ -1,0 +1,22 @@
+# Installazione BMad locale e skill di terze parti
+_bmad/
+_bmad-output/
+.claude/
+.agents/
+.opencode/
+.cline/
+
+# Log di build e referti di analisi del builder
+**/.memlog.md
+**/.analysis/
+
+# Report e cache locali degli eval runner: mai versionare
+**/eval-runs/
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# macOS
+.DS_Store

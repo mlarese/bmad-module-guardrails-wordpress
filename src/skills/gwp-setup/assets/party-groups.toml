@@ -1,0 +1,9 @@
+# Gruppi tematici di bmad-party-mode installati dal setup di Guardrails WordPress.
+#
+# GENERATO da tools/build_modules.py: i membri sono ridotti alle figure che
+# questo modulo installa. Le figure delle altre aree Guardrails restano fuori.
+#
+# Sono override di team in {project-root}/_bmad/custom/bmad-party-mode.toml:
+# nessun default_party viene imposto, ogni gruppo si convoca con `--party <id>`.
+
+# Nessun gruppo: il modulo installa troppe poche figure per una stanza.

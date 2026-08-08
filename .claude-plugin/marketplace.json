@@ -1,0 +1,23 @@
+{
+  "name": "guardrails-wordpress",
+  "owner": "mlarese",
+  "description": "Guardrails WordPress: wordPress a componenti con Gutenberg, campi custom, template e Media Library.",
+  "plugins": [
+    {
+      "name": "gwp",
+      "source": "./src",
+      "description": "Presidio dell'architettura WordPress a componenti: Gutenberg, Elementor confinato dove serve, ACF e campi custom, template e Media Library, senza contenuti strutturati dentro pagine monolitiche.",
+      "version": "1.16.0",
+      "author": "mlarese",
+      "homepage": "https://github.com/mlarese/bmad-module-guardrails-wordpress",
+      "repository": "https://github.com/mlarese/bmad-module-guardrails-wordpress",
+      "license": "MIT",
+      "skills": [
+        "src/skills/gwp-setup",
+        "src/skills/gwp-profile",
+        "src/skills/gwp-board",
+        "src/skills/grl-agent-wordpress"
+      ]
+    }
+  ]
+}
