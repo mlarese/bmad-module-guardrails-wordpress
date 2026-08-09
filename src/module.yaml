@@ -9,8 +9,8 @@
 
 code: gwp
 name: Guardrails WordPress
-description: "Presidio dell'architettura WordPress a componenti: Gutenberg, Elementor confinato dove serve, ACF e campi custom, template e Media Library, senza contenuti strutturati dentro pagine monolitiche."
-module_version: 1.16.0
+description: "Presidio dell'architettura e della consegna WordPress a componenti: Gutenberg, Elementor confinato dove serve, ACF e campi custom, template e Media Library, con creazione, ripresa, migrazione e verifica fino al release gate."
+module_version: 1.17.0
 default_selected: false
 
 module_greeting: >

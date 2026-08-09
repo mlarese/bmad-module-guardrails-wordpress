@@ -1,0 +1,8 @@
+candidate_commit=a81f0d4
+artifact_sha256=0d02bf117c7a10b1e9d3f5a7c9e2b4d6f80123456789abcdef0123456789abcd
+environment=staging-mirror-of-shop.example.it-production
+unit=142/142 passed
+browser=24/24 passed
+deploy=passed
+rollback_to=3.7.4 passed
+restore_test_orders=passed

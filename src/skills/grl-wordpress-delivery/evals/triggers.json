@@ -1,0 +1,23 @@
+[
+  { "query": "crea il sito WordPress da modello contenuti, componenti e asset fino alla consegna", "should_trigger": true },
+  { "query": "riprendi la delivery WordPress dallo stato e continua dai task pending", "should_trigger": true },
+  { "query": "migra 180 pagine Elementor a Gutenberg e ACF preservando slug e media", "should_trigger": true },
+  { "query": "verifica in sola lettura che la delivery WordPress corrisponda allo stato atteso", "should_trigger": true },
+  { "query": "porta questa implementazione WordPress completa fino al release gate", "should_trigger": true },
+  { "query": "importa gli asset nella Media Library e registra gli attachment ID nello stato", "should_trigger": true },
+  { "query": "riparti dal run wp-catalogo-7.3 senza ricreare CPT e template già completati", "should_trigger": true },
+  { "query": "fai il cutover del sito WordPress solo dopo staging, verify e rollback plan", "should_trigger": true },
+  { "query": "controlla pagine, campi, template e media della migrazione senza modificare produzione", "should_trigger": true },
+  { "query": "orchestra Milo, Iris, Otto e Bruno per consegnare il nuovo sito WordPress", "should_trigger": true },
+
+  { "query": "mi serve un ACF Block o basta una Block Binding Gutenberg?", "should_trigger": false },
+  { "query": "come modello un custom post type con un field group ACF", "should_trigger": false },
+  { "query": "questa homepage WordPress sembra generata, criticane la direzione visiva", "should_trigger": false },
+  { "query": "configura nginx, PHP-FPM e backup per il server WordPress", "should_trigger": false },
+  { "query": "la chiave API del plugin WordPress è finita su GitHub", "should_trigger": false },
+  { "query": "la licenza GPL del plugin è compatibile con il nostro prodotto?", "should_trigger": false },
+  { "query": "scrivi il testo della pagina Servizi e pubblicalo come bozza", "should_trigger": false },
+  { "query": "quali keyword deve presidiare la pagina del servizio WordPress?", "should_trigger": false },
+  { "query": "aggiorna WordPress core e tutti i plugin all'ultima versione", "should_trigger": false },
+  { "query": "dammi GO o NO_GO per il commit e l'artefatto già pronti", "should_trigger": false }
+]

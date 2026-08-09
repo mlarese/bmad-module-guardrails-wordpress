@@ -1,0 +1,23 @@
+[
+  { "query": "fai il release gate della v2.4.1 e dimmi GO o NO_GO usando i report CI", "should_trigger": true },
+  { "query": "possiamo pubblicare il commit 91af2e0? voglio un verdetto di rilascio con evidenze", "should_trigger": true },
+  { "query": "la build ha i test verdi ma manca il report del restore: passa il gate?", "should_trigger": true },
+  { "query": "convoca solo le figure Guardrails pertinenti su questo artefatto", "should_trigger": true },
+  { "query": "gwp-board sul diff della release candidate", "should_trigger": true },
+  { "query": "il secret scan è rosso ma il commerciale vuole andare online: decidi il gate", "should_trigger": true },
+  { "query": "registra questo rischio accettato dopo che ti confermo la deroga", "should_trigger": true },
+  { "query": "quali rischi ha già accettato il progetto?", "should_trigger": true },
+  { "query": "prepara il report persistente del gate per tag, commit e artefatto indicati", "should_trigger": true },
+  { "query": "fai guardare questa architettura alle figure Guardrails giuste", "should_trigger": true },
+
+  { "query": "esegui pytest e correggi i test che falliscono prima della release", "should_trigger": false },
+  { "query": "fai una code review adversarial del diff senza decidere il rilascio", "should_trigger": false },
+  { "query": "scrivi il changelog della versione 2.4.1", "should_trigger": false },
+  { "query": "configura il deploy Kubernetes della nuova immagine", "should_trigger": false },
+  { "query": "crea un tag Git e pubblica il pacchetto su npm", "should_trigger": false },
+  { "query": "migra il sito WordPress da Elementor a Gutenberg e ACF", "should_trigger": false },
+  { "query": "la chiave Stripe è nel repository: come la ruoto?", "should_trigger": false },
+  { "query": "il form raccoglie email e telefono: quale base giuridica serve?", "should_trigger": false },
+  { "query": "verifica in sola lettura che pagine e media WordPress siano corretti", "should_trigger": false },
+  { "query": "la landing non converte: rivedi promessa e ordine dei blocchi", "should_trigger": false }
+]

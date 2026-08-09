@@ -1,0 +1,6 @@
+candidate_commit=77b12ae
+image_sha256=0912b4f8e6c0a2d1f3b5e7a9c8d6f4b20123456789abcdef0123456789abcdef
+environment=production-internal
+tests=208/208 passed
+dast=passed
+dependency_scan=passed

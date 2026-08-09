@@ -1,0 +1,6 @@
+candidate_commit=3b1d9e7
+artifact_sha256=41a8c40c2e6f9d7b5a4e3c2f1d0b8a69788776655443322110ffeeddccbbaa99
+environment=npm-public
+unit=86/86 passed
+integration=12/12 passed
+smoke_clean_install=passed

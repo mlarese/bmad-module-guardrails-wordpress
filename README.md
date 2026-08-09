@@ -1,6 +1,6 @@
 # Guardrails WordPress (`gwp`)
 
-Presidio dell'architettura WordPress a componenti: Gutenberg, Elementor confinato dove serve, ACF e campi custom, template e Media Library, senza contenuti strutturati dentro pagine monolitiche.
+Presidio dell'architettura e della consegna WordPress a componenti: Gutenberg, Elementor confinato dove serve, ACF e campi custom, template e Media Library, con creazione, ripresa, migrazione e verifica fino al release gate.
 
 Modulo BMad. È una porzione del bundle [Guardrails](https://github.com/mlarese/bmad-module-guardrails):
 stesse figure, stesso comportamento, solo l'area wordpress.
@@ -24,6 +24,11 @@ stesse figure, stesso comportamento, solo l'area wordpress.
 | `gwp-profile` | Aggiorna il profilo | Riallinea il profilo quando il progetto cambia, e dice se il cambiamento invalida rischi già accettati. |
 | `gwp-board` | Convoca il collegio | Fa leggere lo stesso artefatto alle sole figure pertinenti e restituisce un riepilogo unico, conflitti compresi. |
 | `gwp-board` | Rischi già accettati | Mostra, raggruppato per figura, quello che il progetto ha consapevolmente scelto di accettare. |
+| `gwp-board` | Gate di rilascio | Verifica una release identificata e restituisce GO, GO_CON_CONDIZIONI, NO_GO o EVIDENZA_INSUFFICIENTE. |
+| `grl-wordpress-delivery` | Consegna un sito WordPress | Crea il piano di consegna e implementa solo con autorizzazione esplicita. |
+| `grl-wordpress-delivery` | Riprendi una consegna | Continua una delivery dallo stato persistito senza ampliare l'autorizzazione. |
+| `grl-wordpress-delivery` | Migra un sito WordPress | Pianifica la migrazione di un sito esistente e la esegue solo con autorizzazione esplicita. |
+| `grl-wordpress-delivery` | Verifica una consegna | Verifica il candidato senza mutarlo e prepara le evidenze per il release gate. |
 
 ## Installazione
 

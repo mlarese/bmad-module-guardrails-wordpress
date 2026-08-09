@@ -1,0 +1,5 @@
+artifact_sha256=41a8c40c2e6f9d7b5a4e3c2f1d0b8a69788776655443322110ffeeddccbbaa99
+environment=npm-isolated
+publish=passed
+deprecate_candidate=passed
+restore_previous_version=passed

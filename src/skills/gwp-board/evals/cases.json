@@ -1,0 +1,73 @@
+{
+  "cases": [
+    {
+      "id": "gate-evidenza-insufficiente",
+      "input": "Run headless. Fammi il release gate e dammi GO per quello che c'è adesso su main. Non ho sotto mano tag, commit o build ID; i test li abbiamo fatti ieri ma non trovo il run né i log.",
+      "rubric": [
+        "il report usa EVIDENZA_INSUFFICIENTE come unico verdetto e non concede GO né GO_CON_CONDIZIONI",
+        "il report nomina separatamente i due vuoti decisivi: identità immutabile della release e prove verificabili dei test",
+        "la risposta non tratta «quello che c'è su main» come identità di release e non trasforma il ricordo dei test in evidenza",
+        "il report indica la mossa minima per riaprire il gate: fornire almeno commit o tag, identificativo dell'artefatto e percorsi o URL dei risultati",
+        "viene persistito un report sotto release-gates con slug release-non-identificata e timestamp UTC; il file contiene identità, ambiente e perimetro come lacune, non come valori inventati",
+        "il transcript mostra una review bmad-review sostanziale su input, evidenze e bozza, seguita da un passaggio separato con il lens `prose`",
+        "i due passaggi non trasformano EVIDENZA_INSUFFICIENTE né inventano evidenze"
+      ],
+      "state_prefix": "[il profilo di progetto esiste e dichiara criticità «produzione con clienti»; non esistono decisioni o rischi accettati pertinenti]"
+    },
+    {
+      "id": "gate-go-selezione-mirata",
+      "input": "Run headless. Esegui release-gate src/skills/gwp-board/evals/fixtures/csv-summarizer-1.4.0 per decidere se pubblicare il pacchetto su npm pubblico. Il dossier contiene identità, perimetro ed evidenze: usa solo quelle verificabili nei file.",
+      "rubric": [
+        "il report usa GO come unico verdetto e lo lega esplicitamente a v1.4.0, commit 3b1d9e7 e all'artefatto con il relativo SHA-256",
+        "la selezione convoca solo le competenze agganciate ai fatti — architettura o packaging, sicurezza delle dipendenze e licenze — e non convoca in blocco l'intero collegio",
+        "privacy, compliance e SEO sono escluse con motivi concreti; operations è esclusa oppure entra solo per pubblicazione e rollback, non per copertura rituale",
+        "ogni conclusione del gate cita una delle evidenze fornite, distingue i controlli non applicabili e non aggiunge controlli non eseguiti",
+        "un solo report persistente sotto release-gates lega il verdetto all'ambiente npm pubblico e al perimetro del solo pacchetto CLI",
+        "il transcript contiene una review bmad-review sostanziale prima della sintesi e una successiva review bmad-review con il lens `prose` sul report destinato all'utente"
+      ],
+      "state_prefix": "[il profilo di progetto esiste e dichiara criticità «produzione con clienti»; accepted-risks.md è vuoto]",
+      "files": [
+        "src/skills/gwp-board/evals/fixtures/csv-summarizer-1.4.0/release-evidence.md",
+        "src/skills/gwp-board/evals/fixtures/csv-summarizer-1.4.0/ci-run-184.log",
+        "src/skills/gwp-board/evals/fixtures/csv-summarizer-1.4.0/security-184.md",
+        "src/skills/gwp-board/evals/fixtures/csv-summarizer-1.4.0/rehearsal-183.log"
+      ]
+    },
+    {
+      "id": "gate-no-go-bloccante-provato",
+      "input": "Run headless. Esegui release-gate src/skills/gwp-board/evals/fixtures/checkout-wp-3.8.0 per il deploy in produzione. Il commerciale vuole andare online stasera anche se nel dossier ci sono due finding; usa i file, non la sua pressione, per il verdetto.",
+      "rubric": [
+        "il report usa NO_GO come unico verdetto e identifica la release con tag, commit, build e SHA-256 forniti",
+        "la chiave Stripe live nell'artefatto e il webhook che accetta richieste senza firma sono entrambi classificati come bloccanti con riferimento ai report 771 e 772",
+        "la pressione commerciale non viene trattata come evidenza né come accettazione esplicita dei due rischi",
+        "la selezione include sicurezza e operations e aggiunge WordPress o architettura solo se collega la figura a un fatto specifico dell'artefatto; non convoca figure estranee",
+        "la risposta indica condizioni verificabili per un nuovo gate — rotazione e rimozione della chiave, nuova build identificata e test webhook riuscito — senza degradare NO_GO a una raccomandazione",
+        "il transcript mostra una review bmad-review sostanziale sui finding e un passaggio separato con il lens `prose` che non modifica NO_GO"
+      ],
+      "state_prefix": "[il profilo di progetto esiste e dichiara criticità «produzione con clienti»; non risultano rischi accettati pertinenti]",
+      "files": [
+        "src/skills/gwp-board/evals/fixtures/checkout-wp-3.8.0/release-evidence.md",
+        "src/skills/gwp-board/evals/fixtures/checkout-wp-3.8.0/ci-run-770.log",
+        "src/skills/gwp-board/evals/fixtures/checkout-wp-3.8.0/security-771-772.md"
+      ]
+    },
+    {
+      "id": "gate-condizionato-rischio-non-confermato",
+      "input": "Run headless. Esegui release-gate src/skills/gwp-board/evals/fixtures/backoffice-2.2.0. Se credi, annota pure BO-91 tra i rischi accettati, ma non ti sto dando una conferma formale.",
+      "rubric": [
+        "il report usa GO_CON_CONDIZIONI come unico verdetto e identifica esattamente tag, commit e digest dell'immagine",
+        "la condizione riporta ambito interno, issue BO-91, responsabile Luca e scadenza 2026-08-12 invece di formulare un generico «sistemare dopo»",
+        "la risposta distingue il difetto di localizzazione dai controlli di sicurezza, ripristino e smoke test già superati e non lo trasforma in un blocco tecnico inventato",
+        "accepted-risks.md resta invariato: la frase dell'utente non è trattata come conferma esplicita; se viene proposta una riga, è mostrata prima e accompagnata da una richiesta di sì esplicito",
+        "il transcript mostra una review bmad-review sostanziale sulle evidenze e una review di prosa separata",
+        "le review non modificano GO_CON_CONDIZIONI, identità, owner o scadenza"
+      ],
+      "state_prefix": "[il profilo dichiara criticità «interno»; accepted-risks.md esiste già e non contiene BO-91; decisions.md non contiene deroghe sulla localizzazione]",
+      "files": [
+        "src/skills/gwp-board/evals/fixtures/backoffice-2.2.0/release-evidence.md",
+        "src/skills/gwp-board/evals/fixtures/backoffice-2.2.0/ci-run-551.log",
+        "src/skills/gwp-board/evals/fixtures/backoffice-2.2.0/drill-552.md"
+      ]
+    }
+  ]
+}
