@@ -28,7 +28,7 @@ stesse figure, stesso comportamento, solo l'area wordpress.
 | `grl-wordpress-delivery` | Riprendi una consegna | Continua una delivery dallo stato persistito senza ampliare l'autorizzazione. |
 | `grl-wordpress-delivery` | Migra un sito WordPress | Pianifica la migrazione di un sito esistente e la esegue solo con autorizzazione esplicita. |
 | `grl-wordpress-delivery` | Verifica una consegna | Verifica il candidato senza mutarlo e prepara le evidenze per il release gate. |
-| `grl-automation` | Instrada un'automazione | Classifica lo scenario, sceglie agenti e workflow BMad e dichiara capability mancanti, scope e approvazioni. |
+| `grl-automation` | Instrada un'automazione | Classifica lo scenario, sceglie agenti e workflow BMad e dichiara capability mancanti, scope e approvazioni, includendo social/content e creative video. |
 | `grl-automation` | Prepara un piano eseguibile | Costruisce passi idempotenti con input, output, precondizioni, rischio, approvazione e rollback. |
 | `grl-automation` | Esegui controlli read-only | Raccoglie evidenze e confronti riproducibili senza modificare sistemi esterni. |
 | `grl-automation` | Prepara un dry-run | Genera e valida diff o payload senza spendere, pubblicare o applicare side effect. |

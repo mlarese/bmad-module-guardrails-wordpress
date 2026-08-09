@@ -1,6 +1,6 @@
 ---
 name: grl-automation
-description: Orchestratore Guardrails per automatizzare attività multidisciplinari: classifica la richiesta, sceglie agenti e workflow BMad, costruisce un piano eseguibile, esegue prima controlli read-only e dry-run, richiede approvazioni per effetti esterni e mantiene log, evidenze e rollback. Usa quando l'utente dice "automatizza", "crea un workflow", "orchestra gli agenti" o vuole collegare sviluppo software, legale, fisco, design, architettura, medicina o paid media in un processo ripetibile.
+description: Orchestratore Guardrails per automatizzare attività multidisciplinari: classifica la richiesta, sceglie agenti e workflow BMad, costruisce un piano eseguibile, esegue prima controlli read-only e dry-run, richiede approvazioni per effetti esterni e mantiene log, evidenze e rollback. Usa quando l'utente dice "automatizza", "crea un workflow", "orchestra gli agenti" o vuole collegare sviluppo software, legale, fisco, design, architettura, medicina, social/content o paid media in un processo ripetibile.
 ---
 
 ## Revisione editoriale finale
@@ -31,6 +31,7 @@ un paziente senza controllo umano.
 | Architettura | Winston + Otto, Kai, Bruno | confini, minimi strati, threat model, operabilità |
 | Medicina | Livia, Vera, Nils, Kai | sicurezza paziente, privacy, `grl-mdsw` se finalità medica, supervisione clinica |
 | Media manager, Google Ads e ADV | Dalia, Nora, Iris, Vera, Aldo | `grl-ads`, tracking, policy, budget, dry-run e rollback |
+| Social organico, calendario e contenuti | Sofia, Marco, Iris, Vera, Aldo | `grl-social`, `grl-social-creative`, review, diritti, consenso e handoff alla produzione |
 
 Se il progetto richiede una figura o una skill non installata, registra `missing_capability`,
 `handoff_status: pending`, nomina il modulo necessario e prosegui solo sulle parti ancora
@@ -165,6 +166,8 @@ silenzio.
 | confini di sistema e operabilità | Otto, Winston, Bruno e Kai |
 | dati clinici, flusso di reparto o dispositivo medico | Livia, Nils e `grl-mdsw` |
 | campagne, ADV, conversioni, budget o policy advertising | Dalia e `grl-ads` |
+| social organico, post, calendario, caption o community | Sofia e `grl-social` |
+| concept, design pubblicitario, video, storyboard o shot list | Marco e `grl-social-creative` |
 
 Il workflow coordina, non emette il parere dell'agente. Un handoff deve contenere domanda,
 artefatto, contesto, evidenza e decisione richiesta.

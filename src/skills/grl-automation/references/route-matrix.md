@@ -12,6 +12,8 @@ segnale decisivo e aggiungi una seconda route solo se modifica la decisione.
 | Architettura | Winston + Otto | Kai, Bruno, Enzo | ADR, threat model, rollback |
 | Medicina | Livia | Vera, Nils, Kai | sicurezza paziente; `grl-mdsw` |
 | Paid media | Dalia + `grl-ads` | Nora, Iris, Vera, Aldo | tracking, policy, budget, approvazione |
+| Social organico e contenuti | Sofia + `grl-social` | Marco, Iris, Nora, Vera, Aldo | brief, calendario, review, diritti, consenso, nessuna pubblicazione implicita |
+| Creative advertising e short-form video | Marco + `grl-social-creative` | Sofia, Iris, Dalia, Vera, Aldo | concept, storyboard, asset spec, review e handoff alla produzione |
 
 Se una domanda attraversa due righe, lascia scritto il motivo del passaggio e quale figura ha il
 verdetto decisivo.
