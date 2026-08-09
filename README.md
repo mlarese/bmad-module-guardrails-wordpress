@@ -19,7 +19,6 @@ stesse figure, stesso comportamento, solo l'area wordpress.
 
 | Skill | Comando | Cosa fa |
 | ----- | ------- | ------- |
-| `gwp-setup` | Installa Guardrails WordPress | Registra Guardrails, le figure, le stanze tematiche di party mode e le voci di help. Non crea la memoria condivisa. |
 | `gwp-profile` | Profila il progetto | Raccoglie in pochi minuti gli otto campi che danno contesto a tutte le figure, criticità inclusa. |
 | `gwp-profile` | Aggiorna il profilo | Riallinea il profilo quando il progetto cambia, e dice se il cambiamento invalida rischi già accettati. |
 | `gwp-board` | Convoca il collegio | Fa leggere lo stesso artefatto alle sole figure pertinenti e restituisce un riepilogo unico, conflitti compresi. |

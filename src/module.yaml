@@ -4,13 +4,11 @@
 # Non modificare qui: le modifiche si fanno nella fonte e poi si rigenera.
 #
 # Questa è la copia che legge l'installer BMad: la cerca in src/module.yaml.
-# La copia in src/skills/gwp-setup/assets/module.yaml resta per
-# l'installazione manuale via gwp-setup: le due sono identiche.
 
 code: gwp
 name: Guardrails WordPress
 description: "Presidio dell'architettura e della consegna WordPress a componenti: Gutenberg, Elementor confinato dove serve, ACF e campi custom, template e Media Library, con creazione, ripresa, migrazione e verifica fino al release gate."
-module_version: 1.20.0
+module_version: 1.21.0
 default_selected: false
 
 module_greeting: >
@@ -25,7 +23,7 @@ module_greeting: >
 # memoria condivisa del progetto (_bmad/memory/grl-shared/project-profile.md).
 # La severità si deriva dalla criticità dichiarata nel profilo di progetto.
 #
-# La cartella della memoria condivisa NON va creata dal setup: la crea
+# La cartella della memoria condivisa NON va creata dall'installer: la crea
 # gwp-profile alla prima esecuzione.
 #
 # Questo modulo è una porzione del bundle Guardrails (`grl`). Bundle e moduli
