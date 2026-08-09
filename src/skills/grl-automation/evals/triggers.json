@@ -3,6 +3,8 @@
   { "query": "crea un workflow che coordini legale, fisco e privacy", "should_trigger": true },
   { "query": "orchestra design e architettura in un processo ripetibile", "should_trigger": true },
   { "query": "automatizza la valutazione di un software sanitario", "should_trigger": true },
+  { "query": "orchestra la diagnosi di una query lenta con Dario, test e rollback senza applicare", "should_trigger": true },
+  { "query": "prepara una procedura human-only per il cutover del database managed", "should_trigger": true },
   { "query": "crea un job per ottimizzare Google Ads con approvazione e rollback", "should_trigger": true },
   { "query": "scrivi direttamente il nuovo endpoint", "should_trigger": false },
   { "query": "qual è la base giuridica del form?", "should_trigger": false },

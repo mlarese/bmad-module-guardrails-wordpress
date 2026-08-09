@@ -1,6 +1,6 @@
 ---
 name: grl-automation
-description: Orchestratore Guardrails per automatizzare attività multidisciplinari: classifica la richiesta, sceglie agenti e workflow BMad, costruisce un piano eseguibile, esegue prima controlli read-only e dry-run, richiede approvazioni per effetti esterni e mantiene log, evidenze e rollback. Usa quando l'utente dice "automatizza", "crea un workflow", "orchestra gli agenti" o vuole collegare sviluppo software, legale, fisco, design, architettura, medicina, social/content o paid media in un processo ripetibile.
+description: Orchestratore Guardrails per automatizzare attività multidisciplinari: classifica la richiesta, sceglie agenti e workflow BMad, costruisce un piano eseguibile, esegue prima controlli read-only e dry-run, richiede approvazioni per effetti esterni e mantiene log, evidenze e rollback. Usa quando l'utente dice "automatizza", "crea un workflow", "orchestra gli agenti" o vuole collegare sviluppo software, database, debugging, provisioning, legale, fisco, design, architettura, medicina, social/content o paid media in un processo ripetibile.
 ---
 
 ## Revisione editoriale finale
@@ -25,6 +25,9 @@ un paziente senza controllo umano.
 | Scenario | Route primaria | Guardrail e workflow |
 | --- | --- | --- |
 | Sviluppo software | BMM Analyst/PM/Architect/Dev/TEA + Otto, Kai, Bruno, Enzo | `gwp-board`, test, sicurezza, rollback |
+| Database e persistenza | Dario + BMM Architect/Dev/TEA | glossario di dominio, ricerca live, benchmark, migrazione reversibile e `gwp-board` |
+| Bug o regressione difficile | agente proprietario + Dario/Bruno/Enzo secondo il segnale | riproduzione rossa, ipotesi falsificabili, una misura per volta, regression test e postmortem |
+| Credenziali, provisioning o cutover | Bruno + owner umano | procedura human-in-the-loop, segreti fuori dai log, conferma prima dell'irreversibile |
 | Ambiente legale | Aldo, Vera, Nils | `grl-legal-updates`, fonti live, nessun parere sostitutivo |
 | Commercialista/fisco | Marta | `grl-fiscal-updates`, fonte primaria, requisiti e scadenze |
 | Design di qualsiasi genere | BMM UX/CIS + Iris | brief, criteri, accessibilità, licenze, revisione umana |
@@ -48,7 +51,7 @@ autorizzate; il gate che dipende dalla capability resta `blocked` o `EVIDENZA_IN
    Se fallisce, leggi `{project-root}/_bmad/config.toml` e `config.user.toml`, con italiano come
    default.
 2. Leggi, se esistono, `{project-root}/_bmad/memory/grl-shared/project-profile.md`,
-   `decisions.md` e `accepted-risks.md`.
+   `domain-glossary.md`, `decisions.md` e `accepted-risks.md`.
 3. Cerca un run esistente in `{output_folder}/automation/{slug}/`. Se esiste, riprendi quello:
    non creare una seconda esecuzione con lo stesso obiettivo.
 4. Chiedi soltanto: obiettivo, input, risultato atteso, sistema coinvolto, autorizzazione,
@@ -82,6 +85,12 @@ Scrivi una riga di obiettivo e assegna uno o più domini. Per ogni dominio indic
 - skill disponibili o mancanti;
 - input necessario;
 - rischio se il routing è sbagliato.
+
+Se compaiono termini ambigui che cambiano entità, stati, ownership o confini, inserisci prima un
+passo `gwp-profile:domain` oppure marca il termine come `da confermare`: non trasformare una
+parola incerta in uno schema o in un side effect. Se compare un sintomo tecnico, il piano deve
+separare fatto osservato, ipotesi e prova; se compare una credenziale o un cutover, il piano deve
+separare il passo eseguibile dall'azione che solo l'utente può compiere.
 
 Non chiamare tutte le figure per abitudine. Se il risultato dipende da due domini, usa prima il
 proprietario decisivo e poi una review mirata.
@@ -130,6 +139,23 @@ Prima di un side effect produci:
 Se esiste un'API con `validate_only`, usala nel dry-run. Un dry-run non deve essere chiamato
 "eseguito" e non deve consumare budget o pubblicare.
 
+Per i passi human-only carica `references/human-only-wizard.md`: prepara istruzioni idempotenti,
+ma non chiedere né scrivere segreti nei log e non classificare come eseguito ciò che l'utente deve
+fare in un pannello esterno.
+
+### Diagnosi di bug e regressioni
+
+Quando il risultato richiesto è correggere un bug o una regressione, aggiungi nel piano:
+
+1. una riproduzione minima, test o replay che fallisce;
+2. da tre a cinque ipotesi falsificabili, ciascuna con la misura che la può smentire;
+3. una sola variabile strumentata per esperimento;
+4. modifica minima e test di regressione sul seam o sull'invariante;
+5. pulizia della strumentazione e criterio di osservazione post-fix.
+
+Se non esiste ancora una riproduzione, lo stato resta `blocked` o `ready` per la raccolta dati:
+non chiamare “causa” la prima spiegazione plausibile.
+
 ### 4. Gate di approvazione
 
 Chiedi approvazione esplicita per ciascuna classe di effetto:
@@ -164,6 +190,8 @@ silenzio.
 | fisco, IVA, bando, contributo o rendicontazione | Marta; `grl-fiscal-updates` per novità temporali |
 | estetica, identità, layout, presentazione o creatività | Iris, Sally o CIS |
 | confini di sistema e operabilità | Otto, Winston, Bruno e Kai |
+| modello dati, motore, schema, query, migrazione o recovery del datastore | Dario e `grl-agent-database`; `gwp-profile:domain` se il linguaggio non è stabile |
+| bug, regressione, replay, benchmark o test di carico | owner del componente, Dario per la persistenza, Bruno per l'infrastruttura, Enzo per la pipeline AI |
 | dati clinici, flusso di reparto o dispositivo medico | Livia, Nils e `grl-mdsw` |
 | campagne, ADV, conversioni, budget o policy advertising | Dalia e `grl-ads` |
 | social organico, post, calendario, caption o community | Sofia e `grl-social` |
@@ -191,6 +219,9 @@ nascondere un'approvazione o per conservare segreti, dati personali, token o exp
 | DR | Dry-run | diff/payload validato senza side effect |
 | EX | Execute approvato | log, esito, osservazione o rollback |
 | RS | Resume | ripresa idempotente dal primo passo non concluso |
+| DB | Database | route Dario, evidenze di workload, benchmark, migrazione e gate |
+| DG | Diagnosi | riproduzione, ipotesi, misura, regressione e osservazione |
+| HW | Human-only | istruzioni a fasi, gestione segreti, conferma e prova dell'azione utente |
 
 ## Chiusura
 

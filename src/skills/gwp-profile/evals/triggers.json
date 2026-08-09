@@ -9,6 +9,8 @@
   { "query": "nel profilo un campo non è noto: lascialo esplicito senza inventare", "should_trigger": true },
   { "query": "il profilo esistente non descrive più il mercato del prodotto", "should_trigger": true },
   { "query": "gwp-profile", "should_trigger": true },
+  { "query": "crea il glossario di dominio e chiarisci i termini usati nel PRD", "should_trigger": true },
+  { "query": "allinea cliente, account e ospite prima di progettare lo schema", "should_trigger": true },
   { "query": "installa e registra tutte le figure Guardrails", "should_trigger": false },
   { "query": "il software è un dispositivo medico secondo il MDR", "should_trigger": false },
   { "query": "quale base giuridica ho per i dati dei clienti", "should_trigger": false },

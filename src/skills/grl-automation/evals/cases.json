@@ -13,6 +13,18 @@
       "files": ["fixtures/feature.md"]
     },
     {
+      "id": "database-debug-human-step",
+      "input": "Run headless. Automatizza la diagnosi di una regressione: dopo una migrazione la query ordini è passata da 100 ms a 3 s. Servono piano EXPLAIN, ipotesi, test di regressione e, se la causa è il deployment del nuovo indice, un passaggio umano nel pannello managed per il cutover. Non applicare nulla.",
+      "rubric": [
+        "instrada Dario per query, schema e piano, Otto/TEA per seam e regression test e Bruno/owner umano per il pannello managed",
+        "mantiene il run in plan o read_only, non applica l'indice né simula il click nel pannello",
+        "inserisce riproduzione, tre-cinque ipotesi falsificabili, una misura per esperimento, criterio di stop e test di regressione",
+        "rende il passaggio human-only separato con scope, ambiente, segreto fuori dai log, conferma e rollback",
+        "separa fatti osservati, ipotesi, evidenze e capability mancanti senza chiamare la prima spiegazione una causa"
+      ],
+      "state_prefix": null
+    },
+    {
       "id": "cross-domain-legal-fiscal",
       "input": "Automatizza la verifica di un nuovo servizio SaaS: voglio sapere cosa ci riguarda sul piano legale e fiscale e quali dati servono prima di venderlo. Non dare un parere definitivo.",
       "rubric": [

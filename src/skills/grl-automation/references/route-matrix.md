@@ -6,6 +6,9 @@ segnale decisivo e aggiungi una seconda route solo se modifica la decisione.
 | Dominio | Prima route | Seconda route | Gate tipico |
 | --- | --- | --- | --- |
 | Software | BMM + Otto | Kai, Bruno, Enzo, TEA | test/release `gwp-board` |
+| Database e persistenza | Dario + BMM Architect | Otto, Bruno, Kai, Enzo, TEA | workload/glossario, ricerca live, benchmark, migrazione e release `gwp-board` |
+| Bug o regressione tecnica | owner del componente | Dario se tocca dati/query, Bruno se tocca runtime, Enzo se tocca AI | riproduzione rossa, ipotesi falsificabili, regression test |
+| Credenziali, provisioning o cutover | Bruno + owner umano | Dario se cambia persistenza, Kai se cambia superficie | procedura human-only, segreto fuori dai log, conferma e rollback |
 | Legale | Aldo | Vera, Nils | fonte primaria o review legale |
 | Fiscale | Marta | Aldo | fonte primaria, requisiti, data |
 | Design | Iris o UX/CIS | `grl-web`, Nora | brief, accessibilità, licenze |

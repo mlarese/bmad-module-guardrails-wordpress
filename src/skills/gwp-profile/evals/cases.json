@@ -75,6 +75,18 @@
         "scrive solo project-profile.md e non modifica le altre memorie condivise"
       ],
       "state_prefix": null
+    },
+    {
+      "id": "linguaggio-del-dominio",
+      "input": "Run headless. Crea il glossario di dominio per una piattaforma di prenotazioni. Nel PRD `cliente`, `account` e `ospite` sono usati come sinonimi; una prenotazione può essere modificata, cancellata o trasferita a un'altra persona. Non scegliere tu il significato: mostra i conflitti e prepara il file condiviso.",
+      "rubric": [
+        "instrada la richiesta nella modalità di linguaggio del dominio e non nella prima profilazione o nell'aggiornamento del profilo",
+        "identifica l'ambiguità fra `cliente`, `account` e `ospite` e porta casi concreti di modifica, cancellazione e trasferimento senza inventare una definizione",
+        "mantiene `project-profile.md` separato e scrive il glossario in `_bmad/memory/grl-shared/domain-glossary.md` usando termini, definizione, non-confusione, caso limite, fonte/owner e stato",
+        "marca i termini non confermati come `proposed`, conserva le domande aperte e non registra una decisione architetturale in decisions.md",
+        "non crea un glossario vuoto e non trasforma una scelta dell'agente in una decisione dell'utente"
+      ],
+      "state_prefix": null
     }
   ]
 }

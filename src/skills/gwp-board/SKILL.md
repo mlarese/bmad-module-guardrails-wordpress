@@ -1,6 +1,6 @@
 ---
 name: gwp-board
-description: Convoca il collegio Guardrails su un artefatto. Usa quando l'utente dice "gwp-board", "convoca il collegio", "fai guardare questo alle figure Guardrails", "chi dovrebbe revisionare questo file", "release-gate [path]", o chiede quali rischi il progetto ha già accettato.
+description: Convoca il collegio Guardrails su un artefatto. Usa quando l'utente dice "gwp-board", "convoca il collegio", "fai guardare questo alle figure Guardrails", "chi dovrebbe revisionare questo file", "separa standards e spec nella review", "release-gate [path]", o chiede quali rischi il progetto ha già accettato.
 ---
 
 # gwp-board
@@ -20,7 +20,7 @@ Agisci come segretario del collegio Guardrails. Nella revisione ordinaria, l'esi
 ## On Activation
 
 1. Riconosci l'intento: revisione di un artefatto (default), vista dei rischi accettati, oppure `release-gate [path]`.
-2. Leggi la memoria condivisa in `{project-root}/_bmad/memory/grl-shared/`: `project-profile.md`, `decisions.md`, `accepted-risks.md`. Per la vista dei rischi, mostra `accepted-risks.md` raggruppato per figura e fermati senza convocare nessuno: sono righe di memoria copiate alla lettera, non prosa da revisionare.
+2. Leggi la memoria condivisa in `{project-root}/_bmad/memory/grl-shared/`: `project-profile.md`, `domain-glossary.md`, `decisions.md`, `accepted-risks.md`. Per la vista dei rischi, mostra `accepted-risks.md` raggruppato per figura e fermati senza convocare nessuno: sono righe di memoria copiate alla lettera, non prosa da revisionare.
 3. Risolvi la configurazione core con `uv run {project-root}/_bmad/scripts/resolve_config.py --project-root {project-root}`: `{communication_language}` è la lingua di ogni output e `{document_output_language}` quella del report del gate. Se fallisce, usa l'italiano e `{project-root}/_bmad-output` come `{output_folder}`.
 4. Profilo assente → non improvvisare la selezione: proponi `gwp-profile`. Se l'utente preferisce non fermarsi, chiedi solo quattro cose — settore, dati personali trattati, mercato (UE/extra-UE), criticità — e dichiara che la selezione è provvisoria.
 5. Risolvi la severità, che decide quanto in basso scende l'asticella del riepilogo, dalla criticità
@@ -60,12 +60,27 @@ Ogni convocata legge l'artefatto dal proprio asse. Usa la figura vera, non la tu
 
 La consegna a ogni figura porta il formato del ritorno, altrimenti torna prosa: **al massimo cinque punti, ordinati per costo di non intervenire, ciascuno con problema, conseguenza nel contesto esaminato e mossa minima; solo quelli, nessun altro testo.** «Niente da segnalare» è un ritorno valido di una riga.
 
+Per un diff di codice, una story/spec o un artefatto che li collega, separa due assi prima di
+ordinare i finding:
+
+- **Standards** — comportamento o struttura in conflitto con convenzioni, vincoli di sicurezza,
+  testabilità o decisioni già accettate dal progetto;
+- **Spec** — comportamento che non implementa il requisito, il criterio di accettazione o il
+  contratto dichiarato.
+
+Ogni asse deve citare il punto osservabile che lo prova e non può trasformare una preferenza in un
+blocco. Fissa il punto di osservazione — commit, diff, versione dell'artefatto o fixture — così la
+review resta ripetibile. Non mescolare un finding di spec con code style, e non proporre un
+refactoring solo perché esiste una smell se non cambia il risultato o il costo del progetto.
+
 Filtri, prima di scrivere qualsiasi punto:
 
 - nella revisione ordinaria, ciò che è in `accepted-risks.md` non si segnala di nuovo, salvo che il contesto sia cambiato in modo da invalidare l'accettazione — e allora si spiega cosa è cambiato; nel release gate si elencano i rischi pertinenti e si verifica che il loro ambito copra la release;
 - ciò che è in `decisions.md` è un vincolo già dato, non una proposta da rifare;
 - niente allarmismo, niente articoli citati a pioggia, niente «consulta un esperto»: le figure *sono* gli esperti;
 - «niente da segnalare» è un esito legittimo, e si scrive con la stessa sicurezza di un allarme.
+- per codice/spec, mantieni distinti `Standards` e `Spec` anche quando la stessa figura trova
+  entrambi; il conflitto fra i due assi resta visibile all'utente.
 
 ## Consegna
 

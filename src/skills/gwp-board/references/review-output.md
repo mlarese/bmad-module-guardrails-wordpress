@@ -4,7 +4,7 @@ Produci un solo riepilogo schematico in conversazione, destinato all'utente che 
 
 1. **Esaminato** — artefatto, severità applicata e stato del profilo.
 2. **Convocate ed escluse** — figura e aggancio concreto, oppure motivo dell'esclusione.
-3. **Per figura** — massimo cinque punti ordinati per costo di non intervenire; ciascuno contiene problema, conseguenza nel contesto esaminato e mossa minima. Una figura senza rilievi occupa una riga.
+3. **Per figura** — massimo cinque punti ordinati per costo di non intervenire; ciascuno contiene problema, conseguenza nel contesto esaminato e mossa minima. Per codice/spec etichetta ogni punto `Standards` o `Spec` e cita la versione osservata. Una figura senza rilievi occupa una riga.
 4. **Conflitti** — richieste incompatibili e costo di ciascuna scelta, senza arbitrare.
 5. **Da registrare** — decisioni prese e rischi che l'utente vuole accettare.
 
