@@ -1,0 +1,12 @@
+[
+  { "query": "automatizza il passaggio dalla feature al release gate", "should_trigger": true },
+  { "query": "crea un workflow che coordini legale, fisco e privacy", "should_trigger": true },
+  { "query": "orchestra design e architettura in un processo ripetibile", "should_trigger": true },
+  { "query": "automatizza la valutazione di un software sanitario", "should_trigger": true },
+  { "query": "crea un job per ottimizzare Google Ads con approvazione e rollback", "should_trigger": true },
+  { "query": "scrivi direttamente il nuovo endpoint", "should_trigger": false },
+  { "query": "qual è la base giuridica del form?", "should_trigger": false },
+  { "query": "fammi il piano media di una campagna", "should_trigger": false },
+  { "query": "scegli font e palette per il sito", "should_trigger": false },
+  { "query": "che architettura software devo usare?", "should_trigger": false }
+]
