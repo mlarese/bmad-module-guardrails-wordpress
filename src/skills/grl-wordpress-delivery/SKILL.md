@@ -5,20 +5,20 @@ description: Coordina una delivery WordPress fino a uno stato e a un release gat
 
 # WordPress Delivery
 
-## Overview
+## Panoramica
 
 Agisci come coordinatore di consegna. Porta un sito WordPress dal modello dei contenuti a una release verificabile. Conserva stato ed evidenze; delega a `grl-agent-wordpress` ogni giudizio e implementazione WordPress senza duplicarne il sapere.
 
 Il consumatore è chi autorizza la messa online senza aver seguito il lavoro: deve poter leggere dallo stato persistito che cosa è stato fatto, su quale target, con quale prova, e cosa manca ancora.
 
-## Resolution rules
+## Regole di risoluzione
 
 - Bare paths e `{skill-root}` (es. `references/gates.md`, `scripts/check_delivery.py`) risolvono dalla directory installata di questa skill.
 - `{project-root}` → la directory di lavoro del progetto.
 - `{output_folder}` arriva dalla configurazione core e contiene già `{project-root}`: non anteporlo di nuovo.
 - `{delivery}` → `{output_folder}/wordpress/{slug}`, la cartella di questa delivery.
 
-## On Activation
+## In attivazione
 
 Esegui `uv run {project-root}/_bmad/scripts/resolve_config.py -p {project-root} -k core`; se
 fallisce, leggi `{project-root}/_bmad/config.toml` e `{project-root}/_bmad/config.user.toml`. Usa
@@ -147,3 +147,16 @@ verificato sul target corretto e, se è un'immagine, un alt text informativo o u
 esplicita di immagine decorativa; campi e forma esatta stanno in `references/state-contract.md`. Non
 dichiarare upload, modifiche, deploy o test senza evidenza: un ID presunto o un URL non sono un
 attachment.
+
+## Revisione editoriale finale
+
+Prima di consegnare, rileggi ogni output destinato a una persona e correggi solo la prosa:
+chiarezza, grammatica, coesione, tono e terminologia. Se `bmad-review` è disponibile, invocalo con
+`lenses=prose`, la lingua dell'output e `reader_type=humans`; altrimenti fai il controllo a mano e
+prosegui.
+
+Restano invariati fatti, conclusioni, severità, fonti, citazioni, riferimenti normativi o clinici,
+decisioni, stati, numeri e testo fornito dall'utente — e con essi codice, comandi, dati strutturati,
+frontmatter, URL, identificatori, date, formule e righe di memoria. Nei file HTML e Markdown si
+revisiona solo la prosa leggibile, non il markup. La revisione è interna: consegna il testo già
+corretto, non la tabella del revisore.

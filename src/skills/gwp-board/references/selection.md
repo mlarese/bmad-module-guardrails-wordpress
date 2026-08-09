@@ -17,6 +17,11 @@ Chi ha la competenza decisiva parla, gli altri tacciono anche quando il tema li 
 
 Una figura del roster che non è installata nel progetto non si convoca: applica il suo mandato da questa tabella e dillo in una riga.
 
+**Marta non registra rischi accettati.** È l'unica figura del collegio che non scrive in
+`accepted-risks.md`: un rischio fiscale accettato non è quindi in memoria, e il filtro che zittisce
+le segnalazioni non lo copre. Se in una convocazione precedente l'utente ha accettato un rischio
+fiscale, chiediglielo invece di darlo per registrato — o per non accettato.
+
 ## Figure fuori da questo modulo
 
 Le tabelle qui sopra citano anche figure Guardrails che questo modulo non installa.

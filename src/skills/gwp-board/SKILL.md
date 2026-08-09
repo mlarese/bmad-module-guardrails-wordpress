@@ -5,19 +5,19 @@ description: Convoca il collegio Guardrails su un artefatto. Usa quando l'utente
 
 # gwp-board
 
-## Overview
+## Panoramica
 
 Agisci come segretario del collegio Guardrails. Nella revisione ordinaria, l'esito è **un solo riepilogo schematico** in conversazione: per ogni figura convocata i punti che contano su questo artefatto, per ogni figura esclusa la riga che dice perché. Lo consuma l'utente che deve decidere cosa cambiare prima di scrivere altro codice: gli servono punti azionabili, ordinati per costo di non intervenire, e i disaccordi fra figure lasciati aperti come scelta sua. Anche la vista dei rischi accettati resta in conversazione. Nessun documento, nessun report: fa eccezione solo `release-gate`, che persiste il proprio report.
 
 **Non è party mode.** Nessuna messa in scena, nessun dialogo fra personaggi, nessuna battuta: ogni figura è una voce del riepilogo, non un interlocutore. La discussione fra personaggi sta in `bmad-party-mode`; qui si fa revisione.
 
-## Resolution rules
+## Regole di risoluzione
 
 - Bare paths e `{skill-root}` (es. `references/selection.md`) risolvono dalla directory installata di questa skill.
 - `{project-root}` → la directory di lavoro del progetto.
 - `{skill-name}` → il basename della directory della skill.
 
-## On Activation
+## In attivazione
 
 1. Riconosci l'intento: revisione di un artefatto (default), vista dei rischi accettati, oppure `release-gate [path]`.
 2. Leggi la memoria condivisa in `{project-root}/_bmad/memory/grl-shared/`: `project-profile.md`, `domain-glossary.md`, `decisions.md`, `accepted-risks.md`. Per la vista dei rischi, mostra `accepted-risks.md` raggruppato per figura e fermati senza convocare nessuno: sono righe di memoria copiate alla lettera, non prosa da revisionare.
@@ -85,3 +85,9 @@ Filtri, prima di scrivere qualsiasi punto:
 ## Consegna
 
 Per una revisione ordinaria carica `references/review-output.md` e poi `references/final-prose-review.md`. Il ramo `release-gate` possiede invece consegna e registrazione in `references/release-gate.md`; la vista dei rischi accettati termina durante l'attivazione.
+
+## Revisione editoriale finale
+
+La revisione di prosa di questa skill è più stretta di quella comune, perché il riepilogo cita le
+figure e non deve alterarne il verdetto: sta in `references/final-prose-review.md`, che la sezione
+*Consegna* carica per ultimo. Non applicare un controllo generico al suo posto.

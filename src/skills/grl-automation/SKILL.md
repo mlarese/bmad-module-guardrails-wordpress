@@ -1,14 +1,7 @@
 ---
 name: grl-automation
-description: Orchestratore Guardrails per automatizzare attività multidisciplinari: classifica la richiesta, sceglie agenti e workflow BMad, costruisce un piano eseguibile, esegue prima controlli read-only e dry-run, richiede approvazioni per effetti esterni e mantiene log, evidenze e rollback. Usa quando l'utente dice "automatizza", "crea un workflow", "orchestra gli agenti" o vuole collegare sviluppo software, database, debugging, provisioning, legale, fisco, design, architettura, medicina, social/content o paid media in un processo ripetibile.
+description: "Orchestratore Guardrails per automatizzare attività multidisciplinari: classifica la richiesta, sceglie agenti e workflow BMad, costruisce un piano eseguibile, esegue prima controlli read-only e dry-run, richiede approvazioni per effetti esterni e mantiene log, evidenze e rollback. Usa quando l'utente dice \"automatizza\", \"crea un workflow\", \"orchestra gli agenti\" o vuole collegare sviluppo software, database, debugging, provisioning, legale, fisco, design, architettura, medicina, social/content o paid media in un processo ripetibile."
 ---
-
-## Revisione editoriale finale
-
-Ogni output leggibile da una persona — piano, runbook, stato, handoff o riepilogo — passa da
-`bmad-review` con `lenses=prose` se disponibile. Correggi solo la prosa: non cambiare comandi,
-configurazioni, dati, fonti, stati, autorizzazioni, decisioni, formule, URL o identificatori.
-Se la skill non è disponibile, esegui un controllo manuale equivalente.
 
 # `grl-automation` — workflow di automazione multidisciplinare
 
@@ -35,6 +28,8 @@ un paziente senza controllo umano.
 | Medicina | Livia, Vera, Nils, Kai | sicurezza paziente, privacy, `grl-mdsw` se finalità medica, supervisione clinica |
 | Media manager, Google Ads e ADV | Dalia, Nora, Iris, Vera, Aldo | `grl-ads`, tracking, policy, budget, dry-run e rollback |
 | Social organico, calendario e contenuti | Sofia, Marco, Iris, Vera, Aldo | `grl-social`, `grl-social-creative`, review, diritti, consenso e handoff alla produzione |
+| Sito WordPress, contenuti e consegna | Milo + Iris, Nora, Kai, Bruno secondo il segnale | `grl-wordpress-delivery`, modello contenuti approvato, media con attachment ID, autorizzazione esplicita e release gate di `gwp-board` |
+| Revenue management, pricing e PMS | Rhea + Marta, Vera secondo il segnale | `grl-revenue-audit`, `grl-revenue-plan`, `grl-revenue-preflight`, dati riproducibili, floor economico, gate PMS/Channel Manager e rollback |
 
 Se il progetto richiede una figura o una skill non installata, registra `missing_capability`,
 `handoff_status: pending`, nomina il modulo necessario e prosegui solo sulle parti ancora
@@ -51,11 +46,14 @@ autorizzate; il gate che dipende dalla capability resta `blocked` o `EVIDENZA_IN
    Se fallisce, leggi `{project-root}/_bmad/config.toml` e `config.user.toml`, con italiano come
    default.
 2. Leggi, se esistono, `{project-root}/_bmad/memory/grl-shared/project-profile.md`,
-   `domain-glossary.md`, `decisions.md` e `accepted-risks.md`.
-3. Cerca un run esistente in `{output_folder}/automation/{slug}/`. Se esiste, riprendi quello:
-   non creare una seconda esecuzione con lo stesso obiettivo.
-4. Chiedi soltanto: obiettivo, input, risultato atteso, sistema coinvolto, autorizzazione,
+   `domain-glossary.md`, `decisions.md` e `accepted-risks.md`. Se un file esiste ma è illeggibile o
+   ha righe fuori formato, non inferirlo e non riscriverlo: dichiara il limite in una riga.
+3. Chiedi soltanto: obiettivo, input, risultato atteso, sistema coinvolto, autorizzazione,
    ambiente, scadenza e chi approva. Se un dato non è noto, scrivi `non noto`.
+4. Ricava `{slug}` dall'obiettivo, in kebab-case, poi **elenca le cartelle già presenti sotto
+   `{output_folder}/automation/`** e cerca il run che corrisponde a questo obiettivo. Se esiste,
+   riprendi quello: non creare una seconda esecuzione con lo stesso obiettivo. La ricerca va fatta
+   qui e non prima, perché senza obiettivo lo slug non esiste ancora.
 5. Determina `mode`: `plan` (default), `read_only`, `dry_run`, `execute` o `resume`.
 
 ## Stato del run
@@ -196,9 +194,16 @@ silenzio.
 | campagne, ADV, conversioni, budget o policy advertising | Dalia e `grl-ads` |
 | social organico, post, calendario, caption o community | Sofia e `grl-social` |
 | concept, design pubblicitario, video, storyboard o shot list | Marco e `grl-social-creative` |
+| tema, blocco, template, campo custom, media o consegna di un sito WordPress | Milo e `grl-wordpress-delivery` |
+| tariffa, KPI alberghiero, forecast, inventario, canale o invio a PMS/Channel Manager | Rhea, `grl-revenue-audit`, `grl-revenue-plan` e `grl-revenue-preflight` |
 
 Il workflow coordina, non emette il parere dell'agente. Un handoff deve contenere domanda,
 artefatto, contesto, evidenza e decisione richiesta.
+
+**Route che richiedono un interlocutore.** `grl-web` non ha modalità headless: il brief si scrive con
+l'utente e il gate di consegna è un giudizio. In un run senza interlocutore un passo che instrada a
+`grl-web` resta `awaiting_approval` con il motivo scritto — non `blocked` generico e non eseguito a
+metà. Lo stesso vale per ogni passo che richiede un'autorizzazione che solo una persona può dare.
 
 ## Memoria condivisa
 
@@ -209,7 +214,7 @@ Mostra prima ogni decisione proposta per `{project-root}/_bmad/memory/grl-shared
 Scrivi `accepted-risks.md` solo dopo conferma esplicita dell'utente. Non usare la memoria per
 nascondere un'approvazione o per conservare segreti, dati personali, token o export completi.
 
-## Capabilities
+## Capacità
 
 | Codice | Azione | Output |
 | --- | --- | --- |
@@ -228,3 +233,16 @@ nascondere un'approvazione o per conservare segreti, dati personali, token o exp
 Consegna: stato del run, risultato ottenuto, passi non eseguiti, approvazioni ancora necessarie,
 owner, evidenze e prossima azione. Un workflow automatizzato è riuscito quando è ripetibile,
 tracciabile e interrompibile, non quando ha eseguito più azioni possibile.
+
+## Revisione editoriale finale
+
+Prima di consegnare, rileggi ogni output destinato a una persona e correggi solo la prosa:
+chiarezza, grammatica, coesione, tono e terminologia. Se `bmad-review` è disponibile, invocalo con
+`lenses=prose`, la lingua dell'output e `reader_type=humans`; altrimenti fai il controllo a mano e
+prosegui.
+
+Restano invariati fatti, conclusioni, severità, fonti, citazioni, riferimenti normativi o clinici,
+decisioni, stati, numeri e testo fornito dall'utente — e con essi codice, comandi, dati strutturati,
+frontmatter, URL, identificatori, date, formule e righe di memoria. Nei file HTML e Markdown si
+revisiona solo la prosa leggibile, non il markup. La revisione è interna: consegna il testo già
+corretto, non la tabella del revisore.

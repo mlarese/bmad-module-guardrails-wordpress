@@ -3,24 +3,6 @@ name: gwp-profile
 description: Crea e aggiorna il profilo di progetto e il linguaggio condiviso del modulo Guardrails. Usa quando l'utente dice "profila il progetto", "crea il profilo Guardrails", "aggiorna il profilo di progetto", "crea il glossario di dominio", "allinea i termini del dominio", invoca "gwp-profile", oppure quando una figura Guardrails segnala che il profilo o il glossario mancano.
 ---
 
-## Revisione editoriale finale
-
-Ogni output destinato a una persona — risposta in conversazione, riepilogo, digest, profilo o testo
-visibile di una pagina — passa da un controllo di prosa prima della consegna.
-
-- Invoca `bmad-review` con `lenses=prose` se disponibile, impostando la lingua dell'output, la
-  guida di stile del progetto e `reader_type=humans`; se l'output contiene più lingue, revisiona ogni lingua
-  separatamente.
-- Applica solo correzioni di chiarezza, grammatica, coesione, tono e terminologia. Non cambiare
-  fatti, conclusioni, severità, fonti, citazioni, riferimenti normativi o clinici, decisioni o testo
-  fornito dall'utente.
-- Lascia invariati codice, comandi, YAML/JSON/TOML/CSV, frontmatter, URL, identificatori, date,
-  formule, dati strutturati e righe di memoria. Nei file HTML/Markdown revisiona solo la prosa
-  leggibile, non markup e struttura.
-- La review è interna: consegna il testo già migliorato, non la tabella del revisore. Se la skill
-  non è installata, esegui un controllo manuale equivalente e prosegui; non installare Freya per
-  questo passaggio.
-
 # gwp-profile
 
 Sei il primo contatto dell'utente con il modulo Guardrails. Lui conosce il proprio progetto;
@@ -119,7 +101,7 @@ Questa è una modalità separata dalla profilazione: non aggiunge un nono campo 
 `project-profile.md` e non trasforma il primo contatto in un workshop interminabile. Serve quando
 un termine cambia il significato di un requisito, di un'entità, di un confine o di una decisione.
 
-1. Leggi, se esistono, `project-profile.md`, `decisions.md`, `accepted-risks.md` e
+1. Se un file esiste ma è illeggibile o ha righe fuori formato, non inferirlo e non riscriverlo: dichiara il limite in una riga, perché senza `accepted-risks.md` leggibile risegnaleresti rischi forse già accettati. Leggi, se esistono, `project-profile.md`, `decisions.md`, `accepted-risks.md` e
    `domain-glossary.md`. Scansiona README, PRD/spec, schema e nomi del codice per raccogliere i
    termini realmente usati; non inventare un vocabolario astratto.
 2. Evidenzia solo i termini sovraccarichi, sinonimi pericolosi e confini ambigui. Per ciascuno
@@ -160,3 +142,16 @@ l'intervista.
 - Se cambia la criticità, dillo esplicitamente: cambia la severità di tutte le figure.
   Un passaggio da interno a pubblico può inoltre invalidare rischi già accettati — segnalalo
   all'utente, ma lascia `accepted-risks.md` alle figure.
+
+## Revisione editoriale finale
+
+Prima di consegnare, rileggi ogni output destinato a una persona e correggi solo la prosa:
+chiarezza, grammatica, coesione, tono e terminologia. Se `bmad-review` è disponibile, invocalo con
+`lenses=prose`, la lingua dell'output e `reader_type=humans`; altrimenti fai il controllo a mano e
+prosegui.
+
+Restano invariati fatti, conclusioni, severità, fonti, citazioni, riferimenti normativi o clinici,
+decisioni, stati, numeri e testo fornito dall'utente — e con essi codice, comandi, dati strutturati,
+frontmatter, URL, identificatori, date, formule e righe di memoria. Nei file HTML e Markdown si
+revisiona solo la prosa leggibile, non il markup. La revisione è interna: consegna il testo già
+corretto, non la tabella del revisore.
