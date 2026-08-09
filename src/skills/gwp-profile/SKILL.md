@@ -1,6 +1,6 @@
 ---
 name: gwp-profile
-description: Crea e aggiorna il profilo di progetto del modulo Guardrails. Usa quando l'utente dice "profila il progetto", "crea il profilo Guardrails", "aggiorna il profilo di progetto", invoca "gwp-profile", oppure quando una figura Guardrails segnala che il profilo di progetto manca.
+description: Crea e aggiorna il profilo di progetto e il linguaggio condiviso del modulo Guardrails. Usa quando l'utente dice "profila il progetto", "crea il profilo Guardrails", "aggiorna il profilo di progetto", "crea il glossario di dominio", "allinea i termini del dominio", invoca "gwp-profile", oppure quando una figura Guardrails segnala che il profilo o il glossario mancano.
 ---
 
 ## Revisione editoriale finale
@@ -47,8 +47,9 @@ questionario di conformità, l'utente non userà mai più il modulo.
    estensioni dei sorgenti, documenti di progetto, estratto del README e il profilo eventualmente
    già scritto. Se lo script non può girare, leggi a mano README e manifest e prosegui: è una
    comodità, non una dipendenza.
-2. Instrada: campo `profilo_esistente` valorizzato → **Aggiornamento**; altrimenti →
-   **Prima profilazione**.
+2. Instrada prima una richiesta esplicita di termini, glossario o linguaggio del dominio verso
+   **Linguaggio del dominio**. In assenza di quel segnale: campo `profilo_esistente` valorizzato
+   → **Aggiornamento**; altrimenti → **Prima profilazione**.
 
 ## Prima profilazione
 
@@ -111,6 +112,39 @@ Quando si attiva:
   cartella ma appartengono alle figure: non crearli e non toccarli.
 - Chiudi mostrando il profilo e due righe: la severità di default che ne deriva (la
   mappatura è nel template) e che le figure ora hanno contesto.
+
+## Linguaggio del dominio
+
+Questa è una modalità separata dalla profilazione: non aggiunge un nono campo a
+`project-profile.md` e non trasforma il primo contatto in un workshop interminabile. Serve quando
+un termine cambia il significato di un requisito, di un'entità, di un confine o di una decisione.
+
+1. Leggi, se esistono, `project-profile.md`, `decisions.md`, `accepted-risks.md` e
+   `domain-glossary.md`. Scansiona README, PRD/spec, schema e nomi del codice per raccogliere i
+   termini realmente usati; non inventare un vocabolario astratto.
+2. Evidenzia solo i termini sovraccarichi, sinonimi pericolosi e confini ambigui. Per ciascuno
+   porta un caso concreto — creazione, modifica, annullamento, duplicato, assenza, ruolo,
+   tempo o ownership — che costringa a distinguere i significati.
+3. Chiedi all'utente di confermare definizione, termine preferito e cosa non va confuso. Le
+   decisioni dell'utente sono fatti del dominio; il repository è evidenza d'uso, non autorità
+   sufficiente per scegliere un significato.
+4. Scrivi o aggiorna `{project-root}/_bmad/memory/grl-shared/domain-glossary.md` usando
+   `assets/domain-glossary-template.md`. Mantieni gli entry accettati, marca quelli incerti come
+   `proposed` e conserva la data e la fonte. Non cancellare un termine senza registrare perché.
+5. Chiudi con i termini che ora sono abbastanza stabili per PRD, architettura o schema e con le
+   domande ancora aperte. Non registrare decisioni architetturali in questo file: quelle restano
+   in `decisions.md` e richiedono il normale passaggio della figura responsabile.
+
+Se non esistono ambiguità che cambiano il lavoro, restituisci `glossario non necessario per ora`
+e non creare un file vuoto.
+
+## Aggiornamento del linguaggio
+
+Quando `domain-glossary.md` esiste, non rifare l'intero glossario: confronta solo i termini toccati
+dal nuovo requisito o dal nuovo codice, mostra la differenza e aggiorna soltanto gli entry che
+l'utente conferma. Un cambio di definizione che modifica schema, API, ownership o criteri di
+accettazione va passato a Dario, Otto o alla figura competente; il glossario non approva da solo
+la decisione tecnica.
 
 ## Aggiornamento
 

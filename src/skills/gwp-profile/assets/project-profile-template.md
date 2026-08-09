@@ -19,6 +19,10 @@ regolamentato → `strict`.
 
 Un campo senza risposta si scrive `non noto`, mai vuoto.
 
+Il linguaggio condiviso del dominio vive separatamente in
+`{project-root}/_bmad/memory/grl-shared/domain-glossary.md`, quando serve. Non è un campo del
+profilo e non va inventato per completare questa pagina.
+
 ## Sanità
 
 {Solo se il progetto è sanitario. Altrimenti si omette la sezione per intero, come `## Note`.}
