@@ -33,7 +33,8 @@ un paziente senza controllo umano.
 | Media manager, Google Ads e ADV | Dalia, Nora, Iris, Vera, Aldo | `grl-ads`, tracking, policy, budget, dry-run e rollback |
 
 Se il progetto richiede una figura o una skill non installata, registra `missing_capability`,
-nomina il modulo necessario e prosegui solo sulle parti ancora autorizzate.
+`handoff_status: pending`, nomina il modulo necessario e prosegui solo sulle parti ancora
+autorizzate; il gate che dipende dalla capability resta `blocked` o `EVIDENZA_INSUFFICIENTE`.
 
 ## In attivazione
 
@@ -91,6 +92,9 @@ Ogni passo di `plan.md` ha questa forma:
 ```text
 id: A-001
 route: skill o agente
+owner: persona o ruolo responsabile del passo e del controllo finale
+idempotency_key: chiave stabile che impedisce di ripetere lo stesso effetto
+stop_condition: condizione osservabile che blocca il run prima di un side effect
 input: file, domanda o dato necessario
 action: lettura | analisi | proposta | dry-run | apply
 output: file o risultato osservabile
@@ -100,6 +104,9 @@ risk: none | low | medium | high
 rollback: come annullare o correggere
 status: pending | blocked | ready
 ```
+
+Questi campi sono obbligatori anche quando il passo resta in `plan` o `read_only`; il record
+completo per l'esecuzione è definito in `references/execution-contract.md`.
 
 Il piano deve essere idempotente: rilanciarlo non deve duplicare file, inviare lo stesso messaggio,
 creare due campagne, applicare due volte una migrazione o riscrivere una decisione già registrata.

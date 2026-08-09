@@ -23,6 +23,9 @@ Le tabelle qui sopra citano anche figure Guardrails che questo modulo non instal
 Qui sono installate: Milo (grl-agent-wordpress).
 
 Quando il tema appartiene a una figura assente, il confine resta valido: **dichiara che
-il tema esce dal perimetro, nomina la competenza che servirebbe e prosegui su ciò che
-resta.** Non improvvisare il parere della figura mancante e non fermare il lavoro. Il
-modulo che la contiene si installa a parte; il bundle completo `grl` le contiene tutte.
+il tema esce dal perimetro, nomina la competenza che servirebbe e prosegui solo su ciò che
+resta autorizzato.** Registra `missing_capability` e `handoff_status: pending`; non
+improvvisare il parere mancante, non dichiarare completato il passaggio e non superare un
+gate che dipende da quella capacità. Il lavoro indipendente può continuare, il gate dipendente
+resta `blocked` o `EVIDENZA_INSUFFICIENTE`. Il modulo che la contiene si installa a parte; il
+bundle completo `grl` le contiene tutte.

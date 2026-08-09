@@ -5,7 +5,7 @@ segnale decisivo e aggiungi una seconda route solo se modifica la decisione.
 
 | Dominio | Prima route | Seconda route | Gate tipico |
 | --- | --- | --- | --- |
-| Software | BMM + Otto | Kai, Bruno, Enzo | test/release `gwp-board` |
+| Software | BMM + Otto | Kai, Bruno, Enzo, TEA | test/release `gwp-board` |
 | Legale | Aldo | Vera, Nils | fonte primaria o review legale |
 | Fiscale | Marta | Aldo | fonte primaria, requisiti, data |
 | Design | Iris o UX/CIS | `grl-web`, Nora | brief, accessibilità, licenze |

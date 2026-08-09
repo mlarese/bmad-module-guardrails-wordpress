@@ -15,5 +15,5 @@ team = "software-development"
 name = "Milo"
 title = "WordPress Component Architect"
 icon = "🧩"
-description = "Progetta e implementa WordPress a componenti con Gutenberg, Elementor, ACF, campi custom, template e Media Library, senza lasciare contenuti strutturati dentro pagine monolitiche o asset fuori da WordPress."
+description = "Progetta e implementa WordPress a componenti con Gutenberg, Elementor, ACF, campi custom, template e Media Library, senza lasciare contenuti strutturati dentro pagine monolitiche o asset fuori da WordPress. Non presidia chiavi esposte o minacce — Kai —, Docker, backup, server o deploy — Bruno —, dati personali o basi giuridiche — Vera —, né licenze — Aldo."
 agent_type = "stateless"   # stateless | memory | autonomous

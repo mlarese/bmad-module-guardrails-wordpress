@@ -1,6 +1,6 @@
 ---
 name: grl-wordpress-delivery
-description: Porta siti WordPress a una release verificabile. Usala quando l'utente invoca "grl-wordpress-delivery" o dice "consegna questo sito WordPress", "riprendi la delivery WordPress", "migra questo sito WordPress", "verifica la delivery in sola lettura", "importa i media e registra gli attachment ID", "orchestra la delivery WordPress" o "portala fino al release gate".
+description: Coordina una delivery WordPress fino a uno stato e a un release gate verificabili. Usala quando l'utente invoca "grl-wordpress-delivery" o dice "consegna questo sito WordPress", "riprendi la delivery WordPress", "migra questo sito WordPress", "verifica la delivery in sola lettura", "importa i media e registra gli attachment ID", "orchestra la delivery WordPress" o "portala fino al release gate". Non è un release gate generico per progetti non WordPress.
 ---
 
 # WordPress Delivery
@@ -96,7 +96,7 @@ Mantieni questi file, aggiornandoli solo con fatti osservati:
 - `delivery.md` — fonte canonica dello stato;
 - `content-model.md` — modello approvato, requisiti aperti e provenienza;
 - `component-plan.md` — componenti, dipendenze e stato di implementazione;
-- `media-map.md` — asset, attachment ID ed evidenza, nella forma che `references/state-contract.md` fissa;
+- `media-map.md` — asset, attachment ID, alt text per le immagini ed evidenza, nella forma che `references/state-contract.md` fissa;
 - `release-evidence.md` — versione candidata, ambiente, controlli, risultati e verdetti.
 
 Prima di ogni transizione di stato, di ogni gate e della promozione, verifica quello che hai
@@ -142,7 +142,8 @@ provenienza e l'intento che la prenderebbe in carico — o in `release-evidence.
 chat chi autorizza la messa online non li vede.
 
 Un media conta come `verified` solo con un attachment ID osservato su WordPress, l'identità
-dell'asset registrata in `media-map.md` e confrontata con `--expected-media`, e il binding
-verificato sul target corretto; campi e forma esatta stanno in `references/state-contract.md`. Non
+dell'asset registrata in `media-map.md` e confrontata con `--expected-media`, il binding
+verificato sul target corretto e, se è un'immagine, un alt text informativo o una dichiarazione
+esplicita di immagine decorativa; campi e forma esatta stanno in `references/state-contract.md`. Non
 dichiarare upload, modifiche, deploy o test senza evidenza: un ID presunto o un URL non sono un
 attachment.

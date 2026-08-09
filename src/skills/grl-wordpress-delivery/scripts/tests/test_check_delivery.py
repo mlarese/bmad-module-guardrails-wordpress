@@ -19,9 +19,9 @@ REPO = Path(__file__).resolve().parents[5]
 
 MEDIA_OK = """# Mappa media
 
-| Asset | Target e binding | Attachment | Stato | Evidenza |
-| --- | --- | --- | --- | --- |
-| logo.png | staging · site-logo | 42 | verified | attachment 42, image/png, 640×320 |
+| Asset | Target e binding | Attachment | Stato | Alt text | Evidenza |
+| --- | --- | --- | --- | --- | --- |
+| logo.png | staging · site-logo | 42 | verified | Logo del sito | attachment 42, image/png, 640×320 |
 """
 
 # Evidenze con il blocco dei path revisionati, il report del gate e l'identità.
@@ -202,7 +202,7 @@ class TestCoerenza:
         assert "review sostanziale" in messages and "verdetto favorevole" in messages
 
     def test_released_con_media_pendente_viola(self, tmp_path: Path) -> None:
-        media = MEDIA_OK + "| hero.webp | staging · home.hero |  | pending | import non eseguito |\n"
+        media = MEDIA_OK + "| hero.webp | staging · home.hero |  | pending | non ancora classificato | import non eseguito |\n"
         result = check(
             delivery(
                 tmp_path,
@@ -294,7 +294,7 @@ class TestMedia:
         assert any("senza evidenza" in v for v in result["violations"])
 
     def test_attachment_duplicato_viola(self, tmp_path: Path) -> None:
-        media = MEDIA_OK + "| hero.webp | staging · home.hero | 42 | verified | attachment 42 |\n"
+        media = MEDIA_OK + "| hero.webp | staging · home.hero | 42 | verified | Hero della home | attachment 42 |\n"
         result = check(delivery(tmp_path, media=media), None)
         assert any("usato da" in v for v in result["violations"])
 
@@ -308,10 +308,24 @@ class TestMedia:
         assert any("colonne attese" in v for v in result["violations"])
 
     def test_il_riepilogo_conta_gli_stati(self, tmp_path: Path) -> None:
-        media = MEDIA_OK + "| hero.webp | staging · home.hero |  | pending | import assente |\n"
+        media = MEDIA_OK + "| hero.webp | staging · home.hero |  | pending | non ancora classificato | import assente |\n"
         result = check(delivery(tmp_path, media=media), None)
         assert result["media"]["by_state"] == {"pending": 1, "verified": 1, "blocked": 0}
         assert result["media"]["all_verified"] is False
+
+    def test_immagine_verified_senza_alt_text_viola(self, tmp_path: Path) -> None:
+        media = MEDIA_OK.replace("| Logo del sito |", "|  |")
+        result = check(delivery(tmp_path, media=media), None)
+        assert any("alt text" in v for v in result["violations"])
+
+    def test_immagine_decorativa_deve_dichiarare_alt_vuoto(self, tmp_path: Path) -> None:
+        media = MEDIA_OK.replace("| Logo del sito |", "| immagine decorativa; alt descrittivo |")
+        result = check(delivery(tmp_path, media=media), None)
+        assert any("alt vuoto" in v for v in result["violations"])
+
+    def test_immagine_decorativa_con_alt_vuoto_passa(self, tmp_path: Path) -> None:
+        media = MEDIA_OK.replace("| Logo del sito |", "| immagine decorativa; alt vuoto |")
+        assert check(delivery(tmp_path, media=media), None)["violations"] == []
 
     def test_parsing_ignora_la_riga_separatrice(self) -> None:
         rows, problems = parse_media_table(MEDIA_OK)
@@ -406,9 +420,9 @@ class TestIdentitaAttesaDeiMedia:
         # scartarla farebbe fallire il confronto su una mappa corretta.
         media = (
             "# Mappa media\n\n"
-            "| Asset | Target e binding | Attachment | Identità | Stato | Evidenza |\n"
-            "| --- | --- | --- | --- | --- | --- |\n"
-            "| logo.png | staging · site-logo | 42 | image/png · 640×320 | verified | GET media/42 |\n"
+            "| Asset | Target e binding | Attachment | Identità | Stato | Alt text | Evidenza |\n"
+            "| --- | --- | --- | --- | --- | --- | --- |\n"
+            "| logo.png | staging · site-logo | 42 | image/png · 640×320 | verified | Logo del sito | GET media/42 |\n"
         )
         result = check(delivery(tmp_path, media=media), None, self.ATTESI)
         assert result["violations"] == []
@@ -593,7 +607,7 @@ class TestPromozione:
         assert any("identificatore immutabile" in v for v in result["violations"])
 
     def test_la_promozione_non_passa_con_un_media_pendente(self, tmp_path: Path) -> None:
-        media = MEDIA_OK + "| hero.webp | staging · home |  | pending | import assente |\n"
+        media = MEDIA_OK + "| hero.webp | staging · home |  | pending | non ancora classificato | import assente |\n"
         folder = delivery(
             tmp_path,
             status="gate-pending",
@@ -603,6 +617,19 @@ class TestPromozione:
         con_evidenze(folder)
         result = check(folder, "release-approved")
         assert any("media ancora pendenti" in v for v in result["violations"])
+
+    def test_la_promozione_non_passa_con_un_media_bloccato(self, tmp_path: Path) -> None:
+        media = MEDIA_OK + "| hero.webp | staging · home |  | blocked | non ancora classificato | import bloccato |\n"
+        folder = delivery(
+            tmp_path,
+            status="gate-pending",
+            gates="{substantive_review: passed, prose_review: passed, release: GO}",
+            media=media,
+        )
+        con_evidenze(folder)
+        result = check(folder, "release-approved")
+        assert any("media bloccati" in v for v in result["violations"])
+        assert any("gate avviati con media aperti" in v for v in result["violations"])
 
     def test_una_promozione_legittima_passa(self, tmp_path: Path) -> None:
         folder = delivery(

@@ -23,9 +23,10 @@ visibile di una pagina — passa da un controllo di prosa prima della consegna.
 
 # Setup del modulo Guardrails
 
-Installi Guardrails in un progetto: la registrazione delle figure nel roster degli agenti, l'installazione delle stanze tematiche di party mode e l'avvio
-della profilazione. L'esito che conta non è il file di config — è che l'utente esca da qui con
-`gwp-profile` già eseguito, perché senza profilo di progetto le figure parlano per luoghi comuni.
+Installi Guardrails in un progetto: la registrazione delle figure nel roster degli agenti, l'installazione delle stanze tematiche di party mode e la
+proposta del passo di profilazione. L'esito che conta non è il file di config — è che l'utente
+sappia come eseguire `gwp-profile`, perché senza profilo di progetto le figure parlano per luoghi
+comuni; il profilo non viene eseguito senza accettazione esplicita.
 
 Identità del modulo e roster stanno in `./assets/module.yaml`: leggilo, non dedurli.
 
@@ -135,13 +136,20 @@ non dal config del modulo.
 
 ## Percorso YAML
 
-Su un'installazione più vecchia valgono gli script generici del template:
+Su un'installazione più vecchia valgono gli script generici del template. Nella procedura
+normale, che non migra configurazioni legacy, usa i target YAML condivisi senza `--legacy-dir`:
 
 ```bash
-python3 ./scripts/merge-config.py --config-path "{project-root}/_bmad/config.yaml" --user-config-path "{project-root}/_bmad/config.user.yaml" --module-yaml ./assets/module.yaml --answers {file-temp} --legacy-dir "{project-root}/_bmad"
-python3 ./scripts/merge-help-csv.py --target "{project-root}/_bmad/module-help.csv" --source ./assets/module-help.csv --legacy-dir "{project-root}/_bmad" --module-code grl
+python3 ./scripts/merge-config.py --config-path "{project-root}/_bmad/config.yaml" --user-config-path "{project-root}/_bmad/config.user.yaml" --module-yaml ./assets/module.yaml --answers {file-temp}
+python3 ./scripts/merge-help-csv.py --target "{project-root}/_bmad/module-help.csv" --source ./assets/module-help.csv
 python3 ./scripts/merge-party-groups.py --project-root "{project-root}" --source ./assets/party-groups.toml
 ```
+
+Questi comandi non cancellano i vecchi file per-modulo. Se esistono configurazioni o cataloghi
+legacy, lasciali intatti e segnala che resta una migrazione da fare. Aggiungi `--legacy-dir` solo
+quando l'utente ha chiesto esplicitamente quella migrazione e hai verificato i file da trasferire:
+il flag legge i valori legacy come fallback e, dopo un merge riuscito, li elimina. Non usarlo
+solo perché l'installazione è YAML.
 
 Il file temporaneo delle risposte può avere una sezione `module` vuota (più una chiave `core` se
 i valori di base non sono ancora stati raccolti); i valori conservano il token `{project-root}`

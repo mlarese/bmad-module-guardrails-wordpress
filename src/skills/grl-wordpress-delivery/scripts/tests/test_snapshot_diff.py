@@ -27,9 +27,9 @@ ATTESO = {
 
 MEDIA_MAP = """# Mappa media
 
-| Asset | Target e binding | Attachment | Stato | Evidenza |
-| --- | --- | --- | --- | --- |
-| logo.png | staging · site-logo | 42 | verified | attachment 42, image/png |
+| Asset | Target e binding | Attachment | Stato | Alt text | Evidenza |
+| --- | --- | --- | --- | --- | --- |
+| logo.png | staging · site-logo | 42 | verified | Logo del sito | attachment 42, image/png |
 """
 
 TABELLA = """# Snapshot

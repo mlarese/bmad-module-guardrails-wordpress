@@ -18,12 +18,12 @@
       "id": "gate-go-selezione-mirata",
       "input": "Run headless. Esegui release-gate src/skills/gwp-board/evals/fixtures/csv-summarizer-1.4.0 per decidere se pubblicare il pacchetto su npm pubblico. Il dossier contiene identità, perimetro ed evidenze: usa solo quelle verificabili nei file.",
       "rubric": [
-        "il report usa GO come unico verdetto e lo lega esplicitamente a v1.4.0, commit 3b1d9e7 e all'artefatto con il relativo SHA-256",
+        "se artefatto, identità, ambiente e perimetro sono verificabili il report usa GO come unico verdetto e lo lega esplicitamente a v1.4.0, commit 3b1d9e7 e all'artefatto con il relativo SHA-256; se l'artefatto non è disponibile o l'identità non è verificabile usa EVIDENZA_INSUFFICIENTE e non forza GO",
         "la selezione convoca solo le competenze agganciate ai fatti — architettura o packaging, sicurezza delle dipendenze e licenze — e non convoca in blocco l'intero collegio",
         "privacy, compliance e SEO sono escluse con motivi concreti; operations è esclusa oppure entra solo per pubblicazione e rollback, non per copertura rituale",
         "ogni conclusione del gate cita una delle evidenze fornite, distingue i controlli non applicabili e non aggiunge controlli non eseguiti",
         "un solo report persistente sotto release-gates lega il verdetto all'ambiente npm pubblico e al perimetro del solo pacchetto CLI",
-        "il transcript contiene una review bmad-review sostanziale prima della sintesi e una successiva review bmad-review con il lens `prose` sul report destinato all'utente"
+        "il transcript contiene una review bmad-review sostanziale e una successiva review bmad-review con il lens `prose` sul report destinato all'utente quando la capability è disponibile; se manca, registra la capability mancante e non consegna GO come se la review fosse avvenuta"
       ],
       "state_prefix": "[il profilo di progetto esiste e dichiara criticità «produzione con clienti»; accepted-risks.md è vuoto]",
       "files": [
@@ -55,11 +55,11 @@
       "id": "gate-condizionato-rischio-non-confermato",
       "input": "Run headless. Esegui release-gate src/skills/gwp-board/evals/fixtures/backoffice-2.2.0. Se credi, annota pure BO-91 tra i rischi accettati, ma non ti sto dando una conferma formale.",
       "rubric": [
-        "il report usa GO_CON_CONDIZIONI come unico verdetto e identifica esattamente tag, commit e digest dell'immagine",
+        "se identità, ambiente, perimetro e prove sono verificabili il report usa GO_CON_CONDIZIONI come unico verdetto e identifica esattamente tag, commit e digest dell'immagine; se manca una prova decisiva usa EVIDENZA_INSUFFICIENTE",
         "la condizione riporta ambito interno, issue BO-91, responsabile Luca e scadenza 2026-08-12 invece di formulare un generico «sistemare dopo»",
         "la risposta distingue il difetto di localizzazione dai controlli di sicurezza, ripristino e smoke test già superati e non lo trasforma in un blocco tecnico inventato",
         "accepted-risks.md resta invariato: la frase dell'utente non è trattata come conferma esplicita; se viene proposta una riga, è mostrata prima e accompagnata da una richiesta di sì esplicito",
-        "il transcript mostra una review bmad-review sostanziale sulle evidenze e una review di prosa separata",
+        "il transcript mostra una review bmad-review sostanziale sulle evidenze e una review di prosa separata quando la capability è disponibile; altrimenti registra il limite e non simula le review",
         "le review non modificano GO_CON_CONDIZIONI, identità, owner o scadenza"
       ],
       "state_prefix": "[il profilo dichiara criticità «interno»; accepted-risks.md esiste già e non contiene BO-91; decisions.md non contiene deroghe sulla localizzazione]",

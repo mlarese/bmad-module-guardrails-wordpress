@@ -22,7 +22,7 @@
       "id": "toml-rerun-idempotente",
       "input": "Riesegui gwp-setup sul progetto corrente: è una riconfigurazione, non una prima installazione. Mantieni tutto ciò che è fuori dai blocchi Guardrails, non duplicare tabelle TOML o party group e non creare la memoria condivisa. Alla chiusura proponi soltanto gwp-profile.",
       "rubric": [
-        "avvisa che la sezione `grl` o i marker esistenti rendono questa una riconfigurazione",
+        "ispeziona davvero la configurazione e avvisa che la sezione `grl` o i marker esistenti rendono questa una riconfigurazione, senza fidarsi soltanto della frase dell'utente",
         "rimuove e rigenera solo i blocchi Guardrails del roster e dei party group, lasciando intatta la configurazione custom non marcata",
         "il risultato è TOML valido e non contiene tabelle duplicate o due copie dei marker",
         "il merge help rimuove le vecchie righe del modulo Guardrails prima di aggiungere quelle correnti e preserva le righe di altri moduli",

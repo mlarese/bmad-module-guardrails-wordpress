@@ -3,7 +3,7 @@
   { "query": "crea il project-profile.md del progetto", "should_trigger": true },
   { "query": "aggiorna il profilo Guardrails perché il prodotto è cambiato", "should_trigger": true },
   { "query": "quali otto informazioni servono alle figure prima di iniziare", "should_trigger": true },
-  { "query": "dichiaro la criticità del progetto: è in produzione con clienti", "should_trigger": true },
+  { "query": "dichiaro la criticità del progetto: è in produzione con clienti; aggiorna il project profile", "should_trigger": true },
   { "query": "il repository è sanitario: compila il profilo e dimmi se serve MDSW", "should_trigger": true },
   { "query": "sono comparsi Stripe e un SDK AI: riallinea il profilo", "should_trigger": true },
   { "query": "nel profilo un campo non è noto: lascialo esplicito senza inventare", "should_trigger": true },

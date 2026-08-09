@@ -4,7 +4,7 @@
       "id": "prima-profilazione-dai-fatti",
       "input": "Profila il progetto. Il repository è un SaaS B2B per studi professionali nell'UE, con una web app Next.js e API, autenticazione utenti e pagamenti Stripe. Usa un componente OpenAI per riassumere i ticket di supporto, senza prendere decisioni automatiche. I clienti sono aziende pubbliche e il prodotto è già in produzione con clienti. Trattiamo nome, email e dati inseriti nei ticket; gli altri dettagli contrattuali non sono noti. Scrivi il profilo usando questi fatti.",
       "rubric": [
-        "esegue o simula chiaramente la scansione del repository prima di formulare i default e usa manifest, README e dipendenze come fatti, non come giudizi",
+        "esegue una scansione read-only del repository prima di formulare i default, oppure dichiara che la scansione non è disponibile e separa i fatti forniti dall'utente; usa manifest, README e dipendenze come fatti, non come giudizi",
         "scrive una sola project-profile.md nel percorso `_bmad/memory/grl-shared/` con tutti gli otto campi base e senza campi vuoti",
         "registra OpenAI come componente AI e ne descrive il ruolo di riassunto dei ticket, senza trasformarlo in un decisore",
         "non scambia gli indizi di autenticazione e pagamenti per una lista certa di dati: distingue dati dichiarati da aspetti da confermare",
@@ -33,7 +33,7 @@
       "id": "blocco-sanita-condizionale",
       "input": "Profila il progetto con criticità regolamentato. È una piattaforma venduta a ospedali UE: importa referti dal LIS e immagini dal PACS, e offre al cardiologo un supporto alla decisione clinica su singoli pazienti. La software house opera come responsabile per conto dell'ospedale. Le integrazioni sono HL7 v2, FHIR e DICOM. I dati precisi trattati e i vincoli contrattuali non sono ancora noti.",
       "rubric": [
-        "rileva il segnale sanitario dal README o dal manifest prima di fare domande e attiva la sezione `## Sanità`",
+        "rileva e cita dal README o dal manifest i segnali `LIS`, `PACS`, `HL7`, `FHIR`, `DICOM` e supporto alla decisione clinica prima di fare domande e attiva la sezione `## Sanità`",
         "mantiene esattamente gli otto campi base e aggiunge al massimo cinque domande o dati sanitari condizionali",
         "compila finalità, contesto, integrazioni, ruolo GDPR e qualificazione MDR senza spostare questi dati nella tabella principale",
         "propone grl-mdsw perché la finalità è di supporto alla decisione clinica e non decide da sola la classe MDR",

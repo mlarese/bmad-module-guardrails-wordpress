@@ -14,6 +14,9 @@ run_id: automation-...
 mode: plan | read_only | dry_run | execute | resume
 scope: sistema e risorse esatte
 actor: utente o agente
+owner: persona o ruolo responsabile del run e del controllo finale
+idempotency_key: chiave stabile per evitare di ripetere lo stesso effetto
+stop_condition: condizione osservabile che interrompe il run prima di un side effect
 approval:
   class: local_write | external_write | money | regulated | irreversible
   by: persona o ruolo

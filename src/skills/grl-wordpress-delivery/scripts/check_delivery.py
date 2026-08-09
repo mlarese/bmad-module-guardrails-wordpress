@@ -93,7 +93,8 @@ ATTACHMENT_ID = re.compile(r"^\d+$")
 # Lo slug e' un segmento di percorso: minuscole, cifre, punti e trattini.
 SLUG = re.compile(r"^[a-z0-9]+([.-][a-z0-9]+)*$")
 
-MEDIA_COLUMNS = ("asset", "target e binding", "attachment", "stato", "evidenza")
+MEDIA_COLUMNS = ("asset", "target e binding", "attachment", "stato", "alt text", "evidenza")
+IMAGE_SUFFIXES = {".avif", ".gif", ".jpeg", ".jpg", ".png", ".svg", ".webp"}
 
 
 def fold(text: str) -> str:
@@ -247,7 +248,7 @@ def parse_media_table(text: str) -> tuple[list[dict], list[str]]:
         if len(cells) < len(header):
             problems.append(f"riga con meno colonne del previsto: {line}")
             continue
-        # Anche le colonne oltre le cinque obbligatorie: `Identità` porta MIME e
+        # Anche le colonne oltre le obbligatorie: `Identità` porta MIME e
         # dimensioni, ed è lì che il confronto con l'atteso va a guardare.
         row = {name: cells[index] for index, name in enumerate(header) if name}
         row.update({column: cells[position[column]] for column in MEDIA_COLUMNS})
@@ -324,10 +325,16 @@ def check_media(rows: list[dict]) -> tuple[dict, list[str]]:
     counts = {value: 0 for value in MEDIA_VALUES}
     unknown: list[str] = []
 
+    def is_image(row: dict) -> bool:
+        identity = str(row.get("identita") or "").strip().lower()
+        asset = str(row.get("asset") or "").strip().lower()
+        return identity.startswith("image/") or Path(asset).suffix in IMAGE_SUFFIXES
+
     for row in rows:
         asset = row["asset"] or "(senza nome)"
         state = row["stato"].strip().lower()
         attachment = row["attachment"].strip()
+        alt_text = row["alt text"].strip()
         evidence = row["evidenza"].strip()
 
         if state in counts:
@@ -346,6 +353,24 @@ def check_media(rows: list[dict]) -> tuple[dict, list[str]]:
                 violations.append(f"`{asset}`: verified senza evidenza")
             if not row["target e binding"].strip():
                 violations.append(f"`{asset}`: verified senza target e binding")
+            if is_image(row):
+                alt_folded = fold(alt_text)
+                decorative_declaration = "decorativ" in alt_folded and "alt" in alt_folded
+                decorative_empty = decorative_declaration and (
+                    "vuot" in alt_folded or "empty" in alt_folded
+                )
+                if not alt_folded or alt_folded in {"non noto", "n a", "da definire", "pending"}:
+                    violations.append(
+                        f"`{asset}`: immagine verified senza alt text informativo o dichiarazione decorativa"
+                    )
+                elif decorative_declaration and not decorative_empty:
+                    violations.append(
+                        f"`{asset}`: dichiarazione decorativa senza dichiarare alt vuoto"
+                    )
+                elif decorative_empty:
+                    # Un'immagine decorativa può avere alt vuoto, ma la scelta
+                    # deve essere esplicita e rileggibile da chi verifica.
+                    pass
 
         if ATTACHMENT_ID.match(attachment):
             if attachment in seen and seen[attachment] != asset:
@@ -518,10 +543,13 @@ def terminal_requirements(
     # di cui non si sa niente, e non puo' passare per completa.
     if not media_readable:
         violations.append(f"`{state}` con la tabella dei media non leggibile")
-    elif media_summary and media_summary["by_state"]["pending"]:
-        violations.append(
-            f"`{state}` con {media_summary['by_state']['pending']} media ancora pendenti"
-        )
+    elif media_summary:
+        pending = media_summary["by_state"]["pending"]
+        blocked = media_summary["by_state"]["blocked"]
+        if pending:
+            violations.append(f"`{state}` con {pending} media ancora pendenti")
+        if blocked:
+            violations.append(f"`{state}` con {blocked} media bloccati")
     return violations
 
 
@@ -670,6 +698,9 @@ def check(
     artifacts_open = [
         key for key in ARTIFACT_KEYS if artifacts.get(key) in ("pending", "blocked")
     ]
+    media_open = bool(media_summary) and bool(
+        media_summary["by_state"]["pending"] or media_summary["by_state"]["blocked"]
+    )
     gates_started = [
         key
         for key in ("substantive_review", "prose_review", "release")
@@ -679,6 +710,11 @@ def check(
         violations.append(
             "gate avviati con artefatti aperti: "
             f"{', '.join(gates_started)} contro {', '.join(artifacts_open)}"
+        )
+    if media_open and gates_started:
+        violations.append(
+            "gate avviati con media aperti: "
+            f"{', '.join(gates_started)} contro pending/blocked nella media-map"
         )
 
     identity = frontmatter.get("release_identity") if isinstance(

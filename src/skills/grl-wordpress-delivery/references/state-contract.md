@@ -35,15 +35,15 @@ I `blockers` si scrivono come lista a blocchi, una voce per riga sotto `blockers
 
 ## La tabella dei media
 
-`media-map.md` porta una tabella con queste intestazioni, in quest'ordine e con queste parole esatte; colonne aggiuntive — di norma `Identità` — sono ammesse:
+`media-map.md` porta una tabella con queste intestazioni e con queste parole esatte; colonne aggiuntive — di norma `Identità` — sono ammesse:
 
 ```markdown
-| Asset | Target e binding | Attachment | Identità | Stato | Evidenza |
-| --- | --- | --- | --- | --- | --- |
-| logo.png | produzione · site-logo | 42 | image/png · 640×320 | verified | GET media/42 |
+| Asset | Target e binding | Attachment | Identità | Stato | Alt text | Evidenza |
+| --- | --- | --- | --- | --- | --- | --- |
+| logo.png | produzione · site-logo | 42 | image/png · 640×320 | verified | Logo del sito | GET media/42 |
 ```
 
-`Stato` vale `pending`, `verified` o `blocked`. `verified` richiede un `Attachment` numerico, un `Target e binding` compilato e un'`Evidenza` non vuota; lo stesso attachment ID non può comparire su due asset diversi. Una tabella che non ha queste colonne non è una delivery senza media: è una delivery di cui non si sa niente, e blocca la promozione.
+`Stato` vale `pending`, `verified` o `blocked`. `verified` richiede un `Attachment` numerico, un `Target e binding` compilato e un'`Evidenza` non vuota; per un'immagine richiede anche un `Alt text` informativo oppure una dichiarazione esplicita che l'immagine è decorativa e ha alt vuoto. Lo stesso attachment ID non può comparire su due asset diversi. Una tabella che non ha queste colonne non è una delivery senza media: è una delivery di cui non si sa niente, e blocca la promozione.
 
 L'identità attesa si passa come JSON `{"<asset>": {"<campo>": "<valore>"}}` a `check_delivery.py --expected-media`. `attachment` e `filename` si confrontano con la loro cella per uguaglianza; `mime`, `dimensions` e `checksum` si cercano come token interi fra `Identità` ed `Evidenza`, quindi vanno registrati lì.
 
