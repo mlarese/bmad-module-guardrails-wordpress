@@ -1,0 +1,4 @@
+[project]
+name = "cardio-support"
+description = "Piattaforma per referti e supporto alla decisione clinica"
+dependencies = ["fastapi>=0.110", "fhir.resources>=7", "pydicom>=2"]

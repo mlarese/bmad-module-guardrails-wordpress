@@ -1,0 +1,70 @@
+{
+  "cases": [
+    {
+      "id": "toml-setup-roster-party-help",
+      "input": "Esegui il setup di Guardrails nel progetto corrente. Esiste `_bmad/config.toml`, non esiste ancora la memoria condivisa e voglio installare il bundle completo senza domande di configurazione. Usa l'identità e il roster da `module.yaml`, registra le figure nel layer custom, installa le stanze tematiche e aggiorna il catalogo help che BMad legge davvero. Alla fine proponi gwp-profile, ma non eseguirlo in questo turno.",
+      "rubric": [
+        "riconosce l'installazione TOML e usa register-agents.py, merge-party-groups.py e il catalogo `_bmad/_config/bmad-help.csv`",
+        "registra tutte le figure con metadati coerenti e mostra che il roster è verificabile dal resolver, senza registrarle nel file installer-managed",
+        "scrive i party group Guardrails nel blocco marcato di `_bmad/custom/bmad-party-mode.toml` e conserva il fatto che la stanza di default non viene sostituita",
+        "usa la copia `Guardrails` del modulo nelle righe help e non crea un catalogo alternativo `_bmad/module-help.csv`",
+        "mantiene il token `{project-root}` letterale nei valori di configurazione ma risolve il percorso reale negli argomenti degli script",
+        "non crea `_bmad/memory/grl-shared/`, mostra il greeting e propone gwp-profile come passo successivo senza eseguirlo"
+      ],
+      "state_prefix": null,
+      "files": [
+        "_bmad/config.toml",
+        "_bmad/_config/bmad-help.csv",
+        "_bmad/custom/config.toml"
+      ]
+    },
+    {
+      "id": "toml-rerun-idempotente",
+      "input": "Riesegui gwp-setup sul progetto corrente: è una riconfigurazione, non una prima installazione. Mantieni tutto ciò che è fuori dai blocchi Guardrails, non duplicare tabelle TOML o party group e non creare la memoria condivisa. Alla chiusura proponi soltanto gwp-profile.",
+      "rubric": [
+        "avvisa che la sezione `grl` o i marker esistenti rendono questa una riconfigurazione",
+        "rimuove e rigenera solo i blocchi Guardrails del roster e dei party group, lasciando intatta la configurazione custom non marcata",
+        "il risultato è TOML valido e non contiene tabelle duplicate o due copie dei marker",
+        "il merge help rimuove le vecchie righe del modulo Guardrails prima di aggiungere quelle correnti e preserva le righe di altri moduli",
+        "non crea project-profile.md, decisions.md o accepted-risks.md e non presume che l'utente abbia accettato di profilare il progetto",
+        "non tocca le skill BMM e non cambia la stanza di default"
+      ],
+      "state_prefix": "[un setup precedente ha scritto `_bmad/custom/config.toml` e `_bmad/custom/bmad-party-mode.toml`; esiste una sezione non marcata `[team] owner = \"Mauro\"` e un gruppo utente `team-custom` che devono restare]",
+      "files": [
+        "_bmad/config.toml",
+        "_bmad/_config/bmad-help.csv",
+        "_bmad/custom/config.toml",
+        "_bmad/custom/bmad-party-mode.toml"
+      ]
+    },
+    {
+      "id": "yaml-installazione-legacy",
+      "input": "Configura Guardrails in questo progetto BMad vecchio: c'è solo `_bmad/config.yaml` e `config.user.yaml`, non `config.toml`. Segui il percorso YAML legacy e dillo chiaramente. Non fingere che register-agents.py possa registrare il roster in questa versione; aggiorna il catalogo legacy previsto e chiudi proponendo il profilo.",
+      "rubric": [
+        "riconosce YAML perché config.toml non esiste e non tenta il percorso TOML",
+        "usa merge-config.py, merge-help-csv.py e merge-party-groups.py con i percorsi YAML documentati, senza passare `--legacy-dir` in modo distruttivo se non necessario",
+        "dichiara il limite reale: merge-config.py non registra le figure nel roster e register-agents.py è riservato al config TOML",
+        "scrive o aggiorna `_bmad/module-help.csv` nel formato legacy e non lo confonde con `_bmad/_config/bmad-help.csv`",
+        "non inventa una severità o una memoria condivisa, non crea project-profile.md e propone gwp-profile",
+        "non tocca le skill BMM e non presenta il setup come installazione completa se il roster legacy resta da registrare"
+      ],
+      "state_prefix": null,
+      "files": [
+        "_bmad/config.yaml",
+        "_bmad/config.user.yaml",
+        "_bmad/module-help.csv"
+      ]
+    },
+    {
+      "id": "nessuna-installazione-bmad-stop",
+      "input": "Setup Guardrails nel repository corrente, che è appena creato e non contiene `_bmad/config.toml` né `_bmad/config.yaml`. Se puoi, crea comunque roster, party mode e memoria così partiamo.",
+      "rubric": [
+        "si ferma perché il progetto non ha un'installazione BMad e lo dichiara esplicitamente",
+        "non inventa un formato di configurazione e non esegue gli script di merge o registrazione",
+        "non crea roster, party group, cataloghi help o memoria condivisa in un progetto privo di config",
+        "indica il prerequisito minimo o il passo successivo senza spacciare il setup per riuscito"
+      ],
+      "state_prefix": null
+    }
+  ]
+}

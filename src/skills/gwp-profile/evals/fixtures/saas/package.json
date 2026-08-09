@@ -1,0 +1,11 @@
+{
+  "name": "studio-flow",
+  "description": "SaaS B2B per studi professionali",
+  "keywords": ["supporto", "ticket", "workflow"],
+  "dependencies": {
+    "next": "15.0.0",
+    "next-auth": "5.0.0",
+    "stripe": "17.0.0",
+    "openai": "4.0.0"
+  }
+}

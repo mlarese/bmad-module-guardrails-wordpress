@@ -1,0 +1,8 @@
+{
+  "name": "helpdesk-publico",
+  "description": "Prodotto di supporto per clienti",
+  "dependencies": {
+    "stripe": "17.0.0",
+    "openai": "4.0.0"
+  }
+}

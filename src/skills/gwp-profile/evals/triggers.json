@@ -1,0 +1,22 @@
+[
+  { "query": "profila il progetto per dare contesto alle figure Guardrails", "should_trigger": true },
+  { "query": "crea il project-profile.md del progetto", "should_trigger": true },
+  { "query": "aggiorna il profilo Guardrails perché il prodotto è cambiato", "should_trigger": true },
+  { "query": "quali otto informazioni servono alle figure prima di iniziare", "should_trigger": true },
+  { "query": "dichiaro la criticità del progetto: è in produzione con clienti", "should_trigger": true },
+  { "query": "il repository è sanitario: compila il profilo e dimmi se serve MDSW", "should_trigger": true },
+  { "query": "sono comparsi Stripe e un SDK AI: riallinea il profilo", "should_trigger": true },
+  { "query": "nel profilo un campo non è noto: lascialo esplicito senza inventare", "should_trigger": true },
+  { "query": "il profilo esistente non descrive più il mercato del prodotto", "should_trigger": true },
+  { "query": "gwp-profile", "should_trigger": true },
+  { "query": "installa e registra tutte le figure Guardrails", "should_trigger": false },
+  { "query": "il software è un dispositivo medico secondo il MDR", "should_trigger": false },
+  { "query": "quale base giuridica ho per i dati dei clienti", "should_trigger": false },
+  { "query": "modella la cartella clinica e le integrazioni FHIR", "should_trigger": false },
+  { "query": "convoca il collegio sui rischi di questa release", "should_trigger": false },
+  { "query": "configura il sito e prepara il brief di conversione", "should_trigger": false },
+  { "query": "quanto è severa questa vulnerabilità in produzione", "should_trigger": false },
+  { "query": "quali informazioni servono per una DPIA", "should_trigger": false },
+  { "query": "il nostro componente AI deve avere eval e schema JSON", "should_trigger": false },
+  { "query": "cambia il nome del progetto nella configurazione BMad", "should_trigger": false }
+]
