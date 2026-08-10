@@ -120,6 +120,10 @@ un termine cambia il significato di un requisito, di un'entità, di un confine o
 4. Scrivi o aggiorna `{project-root}/_bmad/memory/grl-shared/domain-glossary.md` usando
    `assets/domain-glossary-template.md`. Mantieni gli entry accettati, marca quelli incerti come
    `proposed` e conserva la data e la fonte. Non cancellare un termine senza registrare perché.
+   Un termine che il file dichiara in conflitto non riceve una definizione operativa: al suo posto
+   elenca le letture in conflitto e resta `proposed`. Una definizione scritta accanto al conflitto
+   che apre lo chiude di nascosto, e chi legge il glossario più tardi vede una decisione che
+   nessuno ha preso.
 5. Chiudi con i termini che ora sono abbastanza stabili per PRD, architettura o schema e con le
    domande ancora aperte. Non registrare decisioni architetturali in questo file: quelle restano
    in `decisions.md` e richiedono il normale passaggio della figura responsabile.
