@@ -28,6 +28,7 @@ un paziente senza controllo umano.
 | Medicina | Livia, Vera, Nils, Kai | sicurezza paziente, privacy, `grl-mdsw` se finalità medica, supervisione clinica |
 | Media manager, Google Ads e ADV | Dalia, Nora, Iris, Vera, Aldo | `grl-ads`, tracking, policy, budget, dry-run e rollback |
 | Social organico, calendario e contenuti | Sofia, Marco, Iris, Vera, Aldo | `grl-social`, `grl-social-creative`, review, diritti, consenso e handoff alla produzione |
+| Creative advertising e video short-form | Marco + `grl-social-creative`; poi Sofia, Iris, Dalia, Vera, Aldo | concept, storyboard, asset spec, review e handoff alla produzione |
 | Sito WordPress, contenuti e consegna | Milo + Iris, Nora, Kai, Bruno secondo il segnale | `grl-wordpress-delivery`, modello contenuti approvato, media con attachment ID, autorizzazione esplicita e release gate di `gwp-board` |
 | Revenue management, pricing e PMS | Rhea + Marta, Vera secondo il segnale | `grl-revenue-audit`, `grl-revenue-plan`, `grl-revenue-preflight`, dati riproducibili, floor economico, gate PMS/Channel Manager e rollback |
 | Configurazione di prodotto da documento del cliente | Ines + Aldo, Nils secondo il segnale | catalogo revisionato da una persona, validazione deterministica, origine dichiarata per ogni scelta, nessun invio a ERP o gestionale |
