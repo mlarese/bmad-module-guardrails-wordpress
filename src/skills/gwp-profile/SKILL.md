@@ -64,6 +64,9 @@ usati alla lettera.
   una volta; regolamentato → segnalano anche i rischi minori e chiedono di mettere per
   iscritto i rischi accettati.
 - Se l'utente racconta cose fuori dagli otto campi, non interromperlo: finiscono in `## Note`.
+  `## Note` accoglie solo fatti di questo progetto. Non ci vanno le regole della profilazione —
+  che i campi ignoti restano `non noto`, che le figure non deducono — perché il file le applica
+  già. Senza fatti da annotare, `## Note` si omette.
 - Stile: elenchi, frasi brevi, linguaggio semplice. Niente preamboli normativi, niente teatro.
 
 ### Blocco sanità (condizionale)
@@ -75,6 +78,10 @@ nemmeno**: il vincolo dei pochi minuti resta.
 
 Quando si attiva:
 
+- Elenca prima i segnali che lo hanno attivato, ciascuno con la fonte che lo prova: il file e la
+  riga del README o del manifest. Un segnale che arriva solo dal racconto dell'utente si marca
+  come tale. Serve a distinguere ciò che il repository dimostra da ciò che qualcuno ricorda, e a
+  far vedere all'utente su quali prove hai aperto un blocco che gli costa cinque domande.
 - Massimo cinque domande in più, tutte saltabili con `non noto`.
 - La **finalità del software** si chiede sempre: è quella che decide se serve `grl-mdsw`.
   Le altre quattro si chiedono solo se il repository non le copre già.
