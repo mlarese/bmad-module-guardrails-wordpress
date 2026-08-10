@@ -35,6 +35,8 @@ Emetti un solo verdetto:
 
 Una prova mancante non diventa una condizione. Il verdetto vale solo per identificatori, ambiente e perimetro riportati; ogni modifica richiede un nuovo gate.
 
+Un `NO_GO` non porta condizioni, ma dice cosa deve mostrare il gate successivo. Per ogni blocco elenca la correzione **e la prova che la dimostra**: rimuovere una chiave esposta chiede la rotazione più un artefatto ricostruito senza il segreto; riparare una verifica di firma chiede il test che la esercita e fallisce sull'input manomesso. Una correzione senza la prova che la esercita sposta il blocco al gate successivo, dove nessuno saprà se è stata fatta davvero.
+
 ## Stato riprendibile
 
 Il gate attraversa selezione, evidenze, review sostanziale, risoluzione dei finding e review di prosa: se si interrompe a metà, quel lavoro non va perso e non deve somigliare a un verdetto. Tieni un draft in `{output_folder}/release-gates/.draft-{release_slug}-{gate_started_at_utc}.md`, con frontmatter `gate: gwp-board/release-gate/draft`, `verdict: null` e una riga per ogni checkpoint raggiunto (identità congelata, collegio convocato, evidenze raccolte, review sostanziale chiusa, review di prosa chiusa). Aggiornalo a ogni checkpoint.
@@ -71,6 +73,10 @@ Il report non autorizza scritture in memoria. Per aggiungere decisioni o rischi 
 ## Le due review
 
 Prima di fissare il verdetto invoca `bmad-review` senza `lenses=` sul diff o snapshot, sul dossier delle evidenze e sulla bozza del report. Risolvi ogni finding sostanziale con una correzione verificata, una confutazione fondata oppure un rischio accettato il cui ambito copre il gate; un finding decisivo irrisolto impedisce `GO` e `GO_CON_CONDIZIONI`. Se la review manca o fallisce, usa `EVIDENZA_INSUFFICIENTE` e registrane il motivo.
+
+Il report dichiara l'esito reale della review, non un riassunto assolutorio: quanti finding sono arrivati, quali sono decisivi, e per ciascuno se è stato corretto, confutato o accettato — con la prova che lo chiude. «Nessun finding decisivo aperto» si scrive solo dopo aver elencato quelli arrivati e come sono stati chiusi. Un report che dichiara una review pulita mentre la review ha prodotto finding mente a chi autorizza il rilascio, ed è il solo lettore che quel documento abbia.
+
+Dichiara anche **con quale mezzo** la review è avvenuta: `bmad-review` invocata, oppure le lenti applicate a mano perché la skill non era raggiungibile. Il secondo caso è previsto e non degrada il verdetto; attribuire a `bmad-review` un lavoro fatto altrimenti sì, perché promette una garanzia che nessuno ha dato.
 
 Quando contenuto e verdetto sono congelati, conserva una copia del report e invoca separatamente `bmad-review lenses=prose` con output in italiano e `reader_type=humans`. Applica soltanto correzioni editoriali, poi confronta le due copie:
 
