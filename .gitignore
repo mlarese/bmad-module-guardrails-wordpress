@@ -1,6 +1,8 @@
-# Installazione BMad locale e skill di terze parti
-_bmad/
-_bmad-output/
+# Installazione BMad locale e skill di terze parti.
+# La barra iniziale limita la regola alla radice: le fixture degli eval vivono in
+# `src/skills/*/evals/_bmad/` e devono restare versionate.
+/_bmad/
+/_bmad-output/
 .claude/
 .agents/
 .opencode/
