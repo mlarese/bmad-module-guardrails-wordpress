@@ -93,7 +93,7 @@ Quando si attiva:
 - Scrivi **solo** questo file. `decisions.md` e `accepted-risks.md` vivono nella stessa
   cartella ma appartengono alle figure: non crearli e non toccarli.
 - Chiudi mostrando il profilo e due righe: la severità di default che ne deriva (la
-  mappatura è nel template) e che le figure ora hanno contesto.
+mappatura è nel template) e che le figure ora hanno contesto.
 
 ## Linguaggio del dominio
 
