@@ -7,7 +7,7 @@
       "name": "gwp",
       "source": "./src",
       "description": "Presidio dell'architettura e della consegna WordPress a componenti: Gutenberg, Elementor confinato dove serve, ACF e campi custom, template e Media Library, con creazione, ripresa, migrazione e verifica fino al release gate.",
-      "version": "1.35.0",
+      "version": "1.35.1",
       "author": "mlarese",
       "homepage": "https://github.com/mlarese/bmad-module-guardrails-wordpress",
       "repository": "https://github.com/mlarese/bmad-module-guardrails-wordpress",
