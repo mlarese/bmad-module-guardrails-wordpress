@@ -39,6 +39,10 @@ post-install-notes: >
   Poi puoi chiamare una figura per nome, oppure usare `gwp-board` per farle
   guardare tutte insieme lo stesso artefatto.
 
+  Oltre alle figure, il modulo installa questi workflow, che si invocano per nome:
+  - `grl-wordpress-delivery`
+  - `grl-automation`
+
   Se ti servono anche le figure delle altre aree, il bundle completo `grl` le
   contiene tutte: https://github.com/mlarese/bmad-module-guardrails
 
