@@ -2,8 +2,11 @@
 
 ## Stati ammessi
 
-`draft`, `ready`, `blocked`, `awaiting_approval`, `dry_run`, `applied`, `observing`,
-`rolled_back`, `closed`.
+`draft`, `pending`, `ready`, `blocked`, `awaiting_approval`, `dry_run`, `applied`, `observing`,
+`rolled_back`, `closed`, `EVIDENZA_INSUFFICIENTE`.
+
+Questo elenco è l'unico: vale per il piano, per il singolo passo e per i gate. `blocked` dice che
+qualcuno o qualcosa ferma il passo; `EVIDENZA_INSUFFICIENTE` dice che manca la prova per decidere.
 
 Non saltare da `draft` a `applied`. Un passaggio deve avere evidenza nel log.
 

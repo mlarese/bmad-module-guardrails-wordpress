@@ -9,8 +9,11 @@ Flusso obbligatorio:
 1. cerca se esiste già un attachment riusabile;
 2. se non esiste, importa il file con lo strumento disponibile: Media Library, WP-CLI, REST o
    connettore WordPress autorizzato;
-3. verifica l'ID restituito e aggiorna alt text, titolo, caption e descrizione quando il contenuto
-   lo richiede;
+3. rileggi l'attachment per ID — `wp post get <id>` o `GET /wp/v2/media/<id>` — e riporta il campo
+   osservato: è quella la prova dell'upload. Poi classifica l'immagine e scrivi l'alt text di
+   conseguenza: **informativa** → alt descrittivo obbligatorio, che dice cosa mostra e perché sta
+   lì; **decorativa** → alt vuoto, dichiarato come scelta. Aggiorna titolo, caption e descrizione
+   quando il contenuto lo richiede;
 4. salva l'attachment ID nel campo custom o nel dato del blocco;
 5. nel template usa le API native WordPress per generare URL, dimensioni e varianti responsive;
 6. controlla che il componente renda anche quando l'attachment è assente o non più pubblico.
@@ -24,7 +27,7 @@ Se non esistono credenziali, WP-CLI, REST o un tool collegato, il risultato corr
 - codice del componente pronto;
 - elenco dei media pendenti con nome e destinazione;
 - istruzione precisa per l'import;
-- stato esplicito: **non pronto finché la Media Library non è aggiornata**.
+- stato esplicito: **media pendente**, finché la Media Library non è aggiornata.
 
 Per i dati personali nelle immagini, nei PDF o nei metadati, nomina Vera; per ruoli, permessi e
 upload non autorizzati, nomina Kai.

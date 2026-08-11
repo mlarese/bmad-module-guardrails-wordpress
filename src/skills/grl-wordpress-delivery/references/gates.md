@@ -15,11 +15,11 @@ uv run scripts/release_identity.py --commit <hash> --artifact <file> --digest <s
   --version <tag> --target <target> [--content-snapshot <revisione>]
 ```
 
-Ogni mutazione del candidato crea una nuova identità e riporta tutti i gate a `pending`. Se il candidato non può essere identificato esattamente, resta `blocked`: un'etichetta approssimativa non è evidenza di release. Invoca `grl-agent-wordpress` per definire ed eseguire i controlli; separa in `release-evidence.md` fatti osservati, inferenze e punti non verificati.
+Ogni mutazione del candidato crea una nuova identità e riporta tutti i gate a `pending`. Se il candidato non può essere identificato esattamente, resta `blocked`: un'etichetta approssimativa non è evidenza di release. Invoca `grl-agent-wordpress` con la sua capacità `MG` (la scheda `migrazione-e-controlli.md` nelle sue reference) per definire ed eseguire i controlli di merito; separa in `release-evidence.md` fatti osservati, inferenze e punti non verificati.
 
 ## 1. Review sostanziale
 
-Invoca `bmad-review lenses=adversarial,edge-case-hunter,verification-gap,structure` su diff o snapshot del candidato e sui cinque file della delivery: la prosa è del gate 2 e non va revisionata qui.
+Invoca `bmad-review lenses=adversarial,edge-case-hunter,verification-gap,structure` su diff o snapshot del candidato e sui cinque file della delivery — con `intent: verify` sono i tre file che esistono —: la prosa è del gate 2 e non va revisionata qui.
 
 Registra in `release-evidence.md` l'esito di ogni finding sostanziale, in una delle tre forme:
 
@@ -73,6 +73,8 @@ uv run scripts/check_delivery.py {delivery} --transition-to release-approved
 
 Lo script controlla artefatti, media, gate e identità; non può vedere una cosa sola, che il verdetto del gate sia stato emesso per l'identità congelata adesso e non per quella di ieri. Con `GO_CON_CONDIZIONI` registra condizioni, responsabili e scadenze. `released` richiede in più l'evidenza del deploy o della pubblicazione di quella identità.
 
-Eseguire il deploy è fuori dal perimetro di questa skill: la delivery registra l'evidenza di un rilascio avvenuto, non lo esegue e non lo pianifica. Chi deve farlo lo chiede a `grl-agent-ops`.
+Qui vanno distinte due cose che si somigliano. La **mutazione dei contenuti WordPress** — import, campi, media, cutover di una migrazione fra due installazioni — è di questa delivery, eseguita con Milo e sotto autorizzazione registrata. Il **deploy infrastrutturale** — server, container, pipeline, DNS, certificati — è fuori dal perimetro: la delivery ne registra l'evidenza, non lo esegue e non lo pianifica, e chi deve farlo lo chiede a `grl-agent-ops`.
+
+Il cutover cade dalla parte della delivery quando consiste nello spostare contenuti e puntare il sito alla nuova installazione con gli strumenti WordPress; cade da quella di Bruno quando richiede di toccare DNS, reverse proxy o infrastruttura.
 
 Il report del release gate resta invariato e costituisce l'ultimo controllo; consegna la sua formulazione già revisionata. Negli altri casi consegna i blocchi reali senza promuovere il candidato.

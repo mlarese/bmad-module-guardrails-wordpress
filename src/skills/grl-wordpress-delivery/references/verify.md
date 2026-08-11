@@ -2,7 +2,7 @@
 
 Constatare che cosa c'è davvero sul target, senza toccarlo. Una verifica che corregge quello che trova non è più una verifica: diventa la prova di sé stessa, e nessuno può più dire in che stato fosse il sito prima.
 
-`{delivery}` è la cartella della delivery, `{output_folder}/wordpress/{slug}`: è l'unico posto in cui `verify` può scrivere.
+`{delivery}` è la cartella della delivery, `{output_folder}/wordpress/{slug}`. `verify` non scrive niente sul target e niente fuori da questa cartella; unica eccezione prevista, il report del gate 3, che persiste `gwp-board` nella propria destinazione.
 
 ## Baseline
 
@@ -25,6 +25,6 @@ Una delivery nata per `verify` non approva un modello e non pianifica componenti
 
 ## Registrazione
 
-Per ogni differenza registra in `release-evidence.md` valore atteso, valore osservato ed evidenza della lettura. Le correzioni richiedono un intento distinto — `create`, `resume` o `migrate` — e una nuova autorizzazione esplicita: se l'utente chiede di sistemare al volo quello che emerge, proponi quel percorso e spiega che qui una mutazione verrebbe registrata come verifica.
+Per ogni differenza registra in `release-evidence.md` valore atteso, valore osservato ed evidenza della lettura. Le correzioni richiedono una delivery con un altro intento — `create` o `migrate` — e una nuova autorizzazione esplicita: se l'utente chiede di sistemare al volo quello che emerge, proponi quel percorso e spiega che qui una mutazione verrebbe registrata come verifica.
 
 Aggiorna lo stato con `uv run scripts/check_delivery.py {delivery}` e prosegui verso i gate di `references/gates.md` solo se tutti i controlli attesi risultano superati; altrimenti la delivery resta con i suoi blocchi reali.

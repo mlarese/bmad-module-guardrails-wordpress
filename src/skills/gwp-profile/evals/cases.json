@@ -5,7 +5,7 @@
       "input": "Profila il progetto. Il repository è un SaaS B2B per studi professionali nell'UE, con una web app Next.js e API, autenticazione utenti e pagamenti Stripe. Usa un componente OpenAI per riassumere i ticket di supporto, senza prendere decisioni automatiche. I clienti sono aziende pubbliche e il prodotto è già in produzione con clienti. Trattiamo nome, email e dati inseriti nei ticket; gli altri dettagli contrattuali non sono noti. Scrivi il profilo usando questi fatti.",
       "rubric": [
         "esegue una scansione read-only del repository prima di formulare i default, oppure dichiara che la scansione non è disponibile e separa i fatti forniti dall'utente; usa manifest, README e dipendenze come fatti, non come giudizi",
-        "scrive una sola project-profile.md nel percorso `_bmad/memory/grl-shared/` con tutti gli otto campi base e senza campi vuoti",
+        "scrive una sola project-profile.md nel percorso `_bmad/memory/grl-shared/` con tutti i nove campi base e senza campi vuoti",
         "registra OpenAI come componente AI e ne descrive il ruolo di riassunto dei ticket, senza trasformarlo in un decisore",
         "non scambia gli indizi di autenticazione e pagamenti per una lista certa di dati: distingue dati dichiarati da aspetti da confermare",
         "usa `produzione con clienti` perché dichiarata dall'utente e mostra la severità `normal`, senza dedurla dal repository",
@@ -34,7 +34,7 @@
       "input": "Profila il progetto con criticità regolamentato. È una piattaforma venduta a ospedali UE: importa referti dal LIS e immagini dal PACS, e offre al cardiologo un supporto alla decisione clinica su singoli pazienti. La software house opera come responsabile per conto dell'ospedale. Le integrazioni sono HL7 v2, FHIR e DICOM. I dati precisi trattati e i vincoli contrattuali non sono ancora noti.",
       "rubric": [
         "rileva e cita dal README o dal manifest i segnali `LIS`, `PACS`, `HL7`, `FHIR`, `DICOM` e supporto alla decisione clinica prima di fare domande e attiva la sezione `## Sanità`",
-        "mantiene esattamente gli otto campi base e aggiunge al massimo cinque domande o dati sanitari condizionali",
+        "mantiene esattamente i nove campi base e aggiunge al massimo cinque domande o dati sanitari condizionali",
         "compila finalità, contesto, integrazioni, ruolo GDPR e qualificazione MDR senza spostare questi dati nella tabella principale",
         "propone grl-mdsw perché la finalità è di supporto alla decisione clinica e non decide da sola la classe MDR",
         "usa `non noto` per dati e vincoli non forniti, usa `regolamentato` solo perché dichiarato e deriva `strict`",
@@ -69,7 +69,7 @@
       "input": "Crea il profilo per questo piccolo tool interno. So solo che è una libreria Python usata dal mio team, la criticità dichiarata è `interno` e non tratta dati personali né usa AI. Non conosco ancora il mercato, l'hosting, eventuali vincoli contrattuali o altri dettagli: scrivi `non noto` dove serve, senza inventare.",
       "rubric": [
         "scrive `non noto` in ogni campo non coperto invece di lasciare celle vuote o riempirle con supposizioni",
-        "mantiene gli otto campi base, registra libreria/tool interno e nessun componente AI o dato personale come dichiarato",
+        "mantiene i nove campi base, registra libreria/tool interno e nessun componente AI o dato personale come dichiarato",
         "usa la criticità `interno` e mostra la severità `normal` perché l'utente l'ha dichiarata",
         "omette la sezione Sanità e le Note se non servono, senza inserire domande o obblighi sanitari per riflesso",
         "scrive solo project-profile.md e non modifica le altre memorie condivise"

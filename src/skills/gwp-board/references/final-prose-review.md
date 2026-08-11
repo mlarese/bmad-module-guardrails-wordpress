@@ -1,6 +1,6 @@
 # Revisione editoriale finale
 
-Invoca `bmad-review lenses=prose` con la lingua dell'output, la guida di stile del progetto e `reader_type=humans`; per contenuti multilingue revisiona ogni lingua separatamente. Nella revisione ordinaria, se la skill non è disponibile, esegui manualmente lo stesso controllo. Il release gate non ammette questo fallback e segue il proprio contratto.
+Invoca `bmad-review lenses=prose` con la lingua dell'output, la guida di stile del progetto e `reader_type=humans`; per contenuti multilingue revisiona ogni lingua separatamente. Nella revisione ordinaria, se la skill non è disponibile, esegui manualmente lo stesso controllo. Il release gate non ammette il fallback manuale su **questa** review — quella di prosa, che chiude il report — mentre lo ammette sulla review sostanziale: il suo contratto lo dichiara.
 
 Applica soltanto correzioni di chiarezza, grammatica, coesione, tono e terminologia. Non cambiare fatti, conclusioni, severità, fonti, citazioni, riferimenti normativi o clinici, decisioni o testo dell'utente. Lascia invariati codice, comandi, dati strutturati, frontmatter, URL, identificatori, date, formule e righe di memoria; in HTML e Markdown revisiona solo la prosa leggibile. Consegna il testo corretto, non i risultati della review.
 

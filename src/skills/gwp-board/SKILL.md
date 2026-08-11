@@ -15,13 +15,12 @@ Agisci come segretario del collegio Guardrails. Nella revisione ordinaria, l'esi
 
 - Bare paths e `{skill-root}` (es. `references/selection.md`) risolvono dalla directory installata di questa skill.
 - `{project-root}` → la directory di lavoro del progetto.
-- `{skill-name}` → il basename della directory della skill.
 
 ## In attivazione
 
 1. Riconosci l'intento: revisione di un artefatto (default), vista dei rischi accettati, oppure `release-gate [path]`.
 2. Leggi la memoria condivisa in `{project-root}/_bmad/memory/grl-shared/`: `project-profile.md`, `domain-glossary.md`, `decisions.md`, `accepted-risks.md`. Per la vista dei rischi, mostra `accepted-risks.md` raggruppato per figura e fermati senza convocare nessuno: sono righe di memoria copiate alla lettera, non prosa da revisionare.
-3. Risolvi la configurazione core con `uv run {project-root}/_bmad/scripts/resolve_config.py --project-root {project-root}`: `{communication_language}` è la lingua di ogni output e `{document_output_language}` quella del report del gate. Se fallisce, usa l'italiano e `{project-root}/_bmad-output` come `{output_folder}`.
+3. Risolvi la configurazione core con `uv run {project-root}/_bmad/scripts/resolve_config.py --project-root {project-root}`: `{communication_language}` è la lingua di ogni output e `{document_output_language}` quella del report del gate. `{output_folder}` viene da `core.output_folder`, con `{project-root}` già sostituito: è l'argomento che il pre-pass del gate pretende. Se la risoluzione fallisce, usa l'italiano e `{project-root}/_bmad-output`.
 4. Profilo assente → non improvvisare la selezione: proponi `gwp-profile`. Se l'utente preferisce non fermarsi, chiedi solo quattro cose — settore, dati personali trattati, mercato (UE/extra-UE), criticità — e dichiara che la selezione è provvisoria.
 5. Risolvi la severità, che decide quanto in basso scende l'asticella del riepilogo, dalla criticità
    del profilo — hobby/prototipo → `light`, interno → `normal`, produzione con clienti → `normal`,
@@ -36,7 +35,7 @@ Un file di memoria assente, illeggibile o con righe fuori formato non si inferis
 
 ### Headless
 
-Senza interlocutore la revisione ordinaria non si ferma: registra selezione ed esclusioni inferite, salta la pausa di conferma e produce il riepilogo. Il profilo assente non blocca — vale la via provvisoria del passo 4 con severità `normal` e la selezione dichiarata provvisoria. Blocca soltanto l'artefatto mancante o illeggibile, perché senza non c'è niente da leggere. Chiudi con una riga sola:
+Senza interlocutore la revisione ordinaria non si ferma: registra selezione ed esclusioni inferite, salta la **pausa di conferma sulla selezione** e produce il riepilogo. Nient'altro si salta: la sezione «Da registrare» resta una proposta e non si scrive in memoria, perché la conferma che autorizza quella scrittura non è arrivata. Il profilo assente non blocca — vale la via provvisoria del passo 4 con severità `normal` e la selezione dichiarata provvisoria. Blocca soltanto l'artefatto mancante o illeggibile, perché senza non c'è niente da leggere. Chiudi con una riga sola:
 
 ```json
 {"status": "complete|blocked", "reason": "<una riga, solo se blocked>", "convocate": [], "escluse": []}

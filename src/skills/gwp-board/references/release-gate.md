@@ -13,14 +13,15 @@ Il pre-pass fa i controlli esatti — formato e corrispondenza dello SHA-256, et
 ```
 uv run scripts/release_prepass.py --output-folder {output_folder} \
   --artifact <file> --digest <sha256> --id commit=<hash> --id tag=<tag> \
-  --environment "<ambiente>" --scope "<perimetro>" [--repo {project-root}]
+  --environment "<ambiente>" --scope "<perimetro>" [--repo {project-root}] \
+  [--started-at <AAAAMMGGTHHMMSSZ>]
 ```
 
 Interpreta il suo `blocking`: ogni voce è una prova che non regge, non un verdetto. Distingui `identity.well_formed` da `identity.verified`: un hash ben formato che nessuno ha risolto in un repository non è un'identità provata, e le voci in `warnings` vanno dichiarate fra le lacune del report. Identificatori incoerenti sono un blocco; identità, ambiente o perimetro non dimostrabili impediscono `GO`. Se lo script non è eseguibile, esegui gli stessi controlli a mano e dichiaralo nel report fra le lacune.
 
 Usa `{project-root}/_bmad/memory/grl-shared/project-profile.md`, `decisions.md`, `accepted-risks.md`, il diff e i segnali del deploy. Un file di memoria assente, illeggibile o con righe fuori formato non si inferisce: impedisce `GO` e `GO_CON_CONDIZIONI`, e se il rischio accettato è la prova che regge il verdetto porta a `EVIDENZA_INSUFFICIENTE`.
 
-Convoca da una a quattro figure Guardrails installate, ciascuna con un aggancio concreto; una sola figura applicabile è un collegio valido. Roster e confini stanno in `references/selection.md`: caricalo prima di scegliere, anche quando riprendi un gate interrotto. Presenta la selezione prima delle letture e, in modalità interattiva, lascia che l'utente la corregga; in headless registra selezione ed esclusioni e prosegui senza pausa. L'elenco delle escluse copre **tutte** le figure installate, una per una: una figura che non compare né fra le convocate né fra le escluse è stata dimenticata, e chi legge il gate non ha modo di distinguerla da una valutata e scartata. Prima di chiudere la sezione, confronta l'elenco con il roster di `references/selection.md` e verifica che il conto torni. Un profilo assente o soltanto provvisorio impedisce sia `GO` sia `GO_CON_CONDIZIONI`.
+Convoca da una a quattro figure Guardrails installate, ciascuna con un aggancio concreto; una sola figura applicabile è un collegio valido. Roster e confini stanno in `references/selection.md`: caricalo prima di scegliere, anche quando riprendi un gate interrotto. Presenta la selezione prima delle letture e, in modalità interattiva, lascia che l'utente la corregga; in headless registra selezione ed esclusioni e prosegui senza pausa. L'elenco delle escluse copre **tutte le figure del roster installate nel progetto**, una per una — comprese quelle il cui mandato è stato applicato senza convocarle, perché la skill non è installata: una figura che non compare né fra le convocate né fra le escluse è stata dimenticata, e chi legge il gate non ha modo di distinguerla da una valutata e scartata. Prima di chiudere la sezione, confronta l'elenco con il roster di `references/selection.md` e verifica che il conto torni. Un profilo assente o soltanto provvisorio impedisce sia `GO` sia `GO_CON_CONDIZIONI`.
 
 ## Evidenze e verdetto
 
@@ -45,7 +46,7 @@ All'avvio, un draft con la stessa `release_slug` e la stessa identità è il pun
 
 ## Report e registrazione
 
-La destinazione è `report.path` del pre-pass: usala come la restituisce, non ricomporla. Se `report.already_exists` è vero, non sovrascrivere un gate precedente: fermati e chiedi un nuovo timestamp. Il frontmatter è questo:
+La destinazione è `report.path` del pre-pass: usala come la restituisce, non ricomporla. Se `report.already_exists` è vero, non sovrascrivere un gate precedente: fermati e chiedi un nuovo `--started-at`. Alla ripresa di un gate interrotto si ripassa invece il timestamp del draft, che è ciò che lo rende riconoscibile. Il frontmatter è questo:
 
 ```yaml
 ---
@@ -70,15 +71,40 @@ Una violazione va corretta prima della consegna; non dichiarare scritto ciò che
 
 Il report non autorizza scritture in memoria. Per aggiungere decisioni o rischi in `{project-root}/_bmad/memory/grl-shared/`, mostra prima le righe e chiedi conferma esplicita; senza conferma non scrivere.
 
+## Headless
+
+Il gate chiude con la riga strutturata del collegio, allargata di due campi:
+
+```json
+{"status": "complete|blocked", "reason": "<una riga, solo se blocked>", "convocate": [], "escluse": [], "report": "<percorso del report persistito>", "verdict": "GO|GO_CON_CONDIZIONI|NO_GO|EVIDENZA_INSUFFICIENTE"}
+```
+
+I quattro verdetti si mappano così:
+
+| `verdict` | `status` | Perché |
+| --- | --- | --- |
+| `GO` | `complete` | il gate ha deciso |
+| `GO_CON_CONDIZIONI` | `complete` | il gate ha deciso: le condizioni sono lavoro futuro, non un blocco di adesso |
+| `NO_GO` | `complete` | il gate ha deciso di non rilasciare. Un `NO_GO` è un esito, non un fallimento |
+| `EVIDENZA_INSUFFICIENTE` | `blocked` | il gate non ha potuto decidere, e `reason` dice cosa manca |
+
+Due casi non producono verdetto:
+
+- **`report.path` non ottenibile** (cartella mancante, scrittura negata): `status: blocked`,
+  `verdict: null`, `reason` con il percorso tentato. Non consegnare un verdetto che non sta su
+  disco.
+- **`report.already_exists` vero**: `status: blocked`, `verdict: null`, `reason` che chiede un
+  nuovo `gate_started_at_utc`. Un gate precedente non si sovrascrive mai.
+
 ## Le due review
 
 Prima di fissare il verdetto invoca `bmad-review` senza `lenses=` sul diff o snapshot, sul dossier delle evidenze e sulla bozza del report. Risolvi ogni finding sostanziale con una correzione verificata, una confutazione fondata oppure un rischio accettato il cui ambito copre il gate; un finding decisivo irrisolto impedisce `GO` e `GO_CON_CONDIZIONI`. Se la review manca o fallisce, usa `EVIDENZA_INSUFFICIENTE` e registrane il motivo.
 
 Il report dichiara l'esito reale della review, non un riassunto assolutorio: quanti finding sono arrivati, quali sono decisivi, e per ciascuno se è stato corretto, confutato o accettato — con la prova che lo chiude. «Nessun finding decisivo aperto» si scrive solo dopo aver elencato quelli arrivati e come sono stati chiusi. Un report che dichiara una review pulita mentre la review ha prodotto finding mente a chi autorizza il rilascio, ed è il solo lettore che quel documento abbia.
 
-Dichiara anche **con quale mezzo** la review è avvenuta: `bmad-review` invocata, oppure le lenti applicate a mano perché la skill non era raggiungibile. Il secondo caso è previsto e non degrada il verdetto; attribuire a `bmad-review` un lavoro fatto altrimenti sì, perché promette una garanzia che nessuno ha dato.
+Dichiara anche **con quale mezzo** la review è avvenuta: `bmad-review` invocata, oppure le lenti applicate a mano perché la skill non era raggiungibile. Il secondo caso è previsto e non degrada il verdetto; attribuire a `bmad-review` un lavoro fatto altrimenti sì, perché promette una garanzia che nessuno ha dato. Il fallback manuale vale **solo per la review sostanziale**: la review di prosa finale del gate pretende `bmad-review`, e senza di essa il report non si consegna.
 
-Quando contenuto e verdetto sono congelati, conserva una copia del report e invoca separatamente `bmad-review lenses=prose` con output in italiano e `reader_type=humans`. Applica soltanto correzioni editoriali, poi confronta le due copie:
+Quando contenuto e verdetto sono congelati, conserva una copia del report e invoca separatamente `bmad-review lenses=prose` con output in `{document_output_language}` e `reader_type=humans`. Applica soltanto correzioni editoriali, poi confronta le due copie:
 
 ```
 uv run scripts/check_prose_invariants.py <copia-prima>.md <report-dopo>.md

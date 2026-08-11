@@ -31,6 +31,20 @@ I `blockers` si scrivono come lista a blocchi, una voce per riga sotto `blockers
 | `gates.release` | `pending`, `blocked`, `GO`, `GO_CON_CONDIZIONI`, `NO_GO`, `EVIDENZA_INSUFFICIENTE` |
 | `status` | `planning`, `awaiting-authorization`, `implementing`, `verification-pending`, `blocked`, `gate-pending`, `release-approved`, `released` |
 
+Il percorso degli stati è questo, e ogni passaggio ha la sua condizione:
+
+| Da → a | Si apre quando |
+| --- | --- |
+| `planning → awaiting-authorization` | il piano è pronto e nessuno ha ancora autorizzato l'esecuzione |
+| `awaiting-authorization → implementing` | `implementation_authorized: true` con un `authorization_scope` che nomina **questo** target |
+| `implementing → verification-pending` | il lavoro sul target è finito e c'è qualcosa da verificare |
+| `verification-pending → gate-pending` | le verifiche di merito sono passate e i loro esiti sono citabili |
+| `gate-pending → release-approved` | i tre gate hanno esito, e `gates.release` porta `GO` o `GO_CON_CONDIZIONI` |
+| `release-approved → released` | il rilascio è avvenuto davvero, con la sua evidenza |
+
+`release-approved` si raggiunge **solo** da `gate-pending`: è così che si impedisce di approvare un
+rilascio saltando i gate.
+
 `gates.release` porta il verdetto restituito da `gwp-board`, non una sua interpretazione. `not-applicable` esiste perché `verify` non approva un modello e non pianifica componenti: senza, quei due artefatti resterebbero `pending` per sempre e nessun gate potrebbe partire.
 
 ## La tabella dei media

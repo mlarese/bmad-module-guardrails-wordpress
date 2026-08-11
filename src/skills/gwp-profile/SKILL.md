@@ -6,7 +6,7 @@ description: Crea e aggiorna il profilo di progetto e il linguaggio condiviso de
 # gwp-profile
 
 Sei il primo contatto dell'utente con il modulo Guardrails. Lui conosce il proprio progetto;
-tu sai quali otto cose le figure del modulo devono sapere per non parlare per luoghi
+tu sai quali nove cose le figure del modulo devono sapere per non parlare per luoghi
 comuni. L'esito è una pagina sola in `{project-root}/_bmad/memory/grl-shared/project-profile.md`,
 letta in attivazione da Vera, Kai, Aldo, Nils, Marta, Iris, Otto, Vito, Dario, Ada, Bruno, Livia,
 Enzo, Milo, Marea, Nora, Dalia, Sofia, Marco, Elio, Rhea, Ines e Tito, che non
@@ -23,24 +23,31 @@ questionario di conformità, l'utente non userà mai più il modulo.
 
 ## In attivazione
 
-1. Raccogli i fatti dal repository prima di chiedere qualsiasi cosa:
+1. Risolvi la configurazione core:
+   `uv run {project-root}/_bmad/scripts/resolve_config.py -p {project-root} -k core`. Conduci
+   l'intervista in `{communication_language}` e scrivi i due file in
+   `{document_output_language}`: li leggeranno tutte le figure, non solo chi è in questa
+   conversazione. Se la risoluzione fallisce, usa l'italiano per entrambi.
+2. Raccogli i fatti dal repository prima di chiedere qualsiasi cosa:
    `uv run scripts/scan_project.py {project-root}` (interfaccia in `--help`). Restituisce JSON
    con manifest, dipendenze-segnale (AI, autenticazione, analytics, pagamenti, database),
    estensioni dei sorgenti, documenti di progetto, estratto del README e il profilo eventualmente
    già scritto. Se lo script non può girare, leggi a mano README e manifest e prosegui: è una
    comodità, non una dipendenza.
-2. Instrada prima una richiesta esplicita di termini, glossario o linguaggio del dominio verso
-   **Linguaggio del dominio**. In assenza di quel segnale: campo `profilo_esistente` valorizzato
-   → **Aggiornamento**; altrimenti → **Prima profilazione**.
+3. Instrada una richiesta esplicita di termini, glossario o linguaggio del dominio così: se
+   `domain-glossary.md` esiste già → **Aggiornamento del linguaggio**; altrimenti → **Linguaggio
+   del dominio**. In assenza di quel segnale: campo `profilo_esistente` valorizzato →
+   **Aggiornamento**; altrimenti → **Prima profilazione**.
 
 ## Prima profilazione
 
-Otto campi, non uno di più. I nomi sono quelli del contratto di memoria del modulo e vanno
+Nove campi, non uno di più. I nomi sono quelli del contratto di memoria del modulo e vanno
 usati alla lettera.
 
 | Campo del profilo | Cosa serve sapere | Dove cercare il default |
 | ----------------- | ----------------- | ----------------------- |
 | Settore e dominio | in che mercato vive il prodotto | `readme`, `descrizione` e `parole_chiave` del manifest |
+| Dimensione dell'organizzazione | dipendenti e fatturato annuo: sono le soglie che fanno scattare le norme | **nessun default: la dichiara l'utente**, e «non noto» è una risposta ammessa |
 | Tipo di software | web app · sito/landing · API · mobile · tool interno · libreria | `dipendenze_segnale` (frontend, backend, mobile, cli), `estensioni` |
 | Dati personali trattati | quali categorie, oppure «nessuno» | `dipendenze_segnale`: `auth_utenti`, `pagamenti`, `analytics_tracciamento`, `email_notifiche` sono indizi di dati personali — da confermare, non da dare per veri |
 | Utenti e mercato | UE / extra-UE · B2B / B2C · pubblico / interno | `readme`; spesso solo l'utente lo sa |
@@ -63,7 +70,7 @@ usati alla lettera.
   solo se il rischio è concreto; interno e produzione con clienti → segnalano ciò che conta,
   una volta; regolamentato → segnalano anche i rischi minori e chiedono di mettere per
   iscritto i rischi accettati.
-- Se l'utente racconta cose fuori dagli otto campi, non interromperlo: finiscono in `## Note`.
+- Se l'utente racconta cose fuori dai nove campi, non interromperlo: finiscono in `## Note`.
   `## Note` accoglie solo fatti di questo progetto. Non ci vanno le regole della profilazione —
   che i campi ignoti restano `non noto`, che le figure non deducono — perché il file le applica
   già. Senza fatti da annotare, `## Note` si omette.
@@ -86,7 +93,7 @@ Quando si attiva:
 - La **finalità del software** si chiede sempre: è quella che decide se serve `grl-mdsw`.
   Le altre quattro si chiedono solo se il repository non le copre già.
 - Le risposte vanno nella sezione `## Sanità` del template, non nella tabella principale:
-  gli otto campi base restano otto.
+  i nove campi base restano nove.
 - Se la finalità risulta **di supporto alla decisione clinica** o **di monitoraggio**, chiudi
   la profilazione proponendo `grl-mdsw` come passo successivo: è il percorso che stabilisce se
   il software è dispositivo medico e in che classe.
@@ -97,19 +104,22 @@ Quando si attiva:
   nascere.
 - Compila `assets/project-profile-template.md` e scrivilo in
   `{project-root}/_bmad/memory/grl-shared/project-profile.md`. Una pagina, mai di più.
-- Scrivi **solo** questo file. `decisions.md` e `accepted-risks.md` vivono nella stessa
-  cartella ma appartengono alle figure: non crearli e non toccarli.
+- Nella profilazione scrivi **solo** questo file; `domain-glossary.md` ha la propria modalità e si
+  scrive lì. `decisions.md` e `accepted-risks.md` vivono nella stessa cartella ma appartengono alle
+  figure: non crearli e non toccarli.
 - Chiudi mostrando il profilo e due righe: la severità di default che ne deriva (la
-mappatura è nel template) e che le venti figure ora hanno contesto.
+mappatura è nel template) e che le figure del modulo ora hanno contesto.
 
 ## Linguaggio del dominio
 
-Questa è una modalità separata dalla profilazione: non aggiunge un nono campo a
+Questa è una modalità separata dalla profilazione: non aggiunge un decimo campo a
 `project-profile.md` e non trasforma il primo contatto in un workshop interminabile. Serve quando
 un termine cambia il significato di un requisito, di un'entità, di un confine o di una decisione.
 
-1. Se un file esiste ma è illeggibile o ha righe fuori formato, non inferirlo e non riscriverlo: dichiara il limite in una riga, perché senza `accepted-risks.md` leggibile risegnaleresti rischi forse già accettati. Leggi, se esistono, `project-profile.md`, `decisions.md`, `accepted-risks.md` e
-   `domain-glossary.md`. Scansiona README, PRD/spec, schema e nomi del codice per raccogliere i
+1. Leggi, se esistono, `project-profile.md`, `decisions.md`, `accepted-risks.md` e
+   `domain-glossary.md`. Se un file esiste ma è illeggibile o ha righe fuori formato, non inferirlo
+   e non riscriverlo: dichiara il limite in una riga, perché senza quei file non distingui un
+   termine già deciso da uno ancora aperto. Scansiona README, PRD/spec, schema e nomi del codice per raccogliere i
    termini realmente usati; non inventare un vocabolario astratto.
 2. Evidenzia solo i termini sovraccarichi, sinonimi pericolosi e confini ambigui. Per ciascuno
    porta un caso concreto — creazione, modifica, annullamento, duplicato, assenza, ruolo,
@@ -145,7 +155,7 @@ la decisione tecnica.
 
 ## Aggiornamento
 
-Il profilo esistente arriva già dal pre-pass: non rileggerlo dal disco e non ripetere
+Il profilo esistente arriva dal campo `profilo_esistente` del passo 2: non rileggerlo dal disco e non ripetere
 l'intervista.
 
 - Chiedi che cosa è cambiato. Una domanda, aperta.
@@ -154,7 +164,7 @@ l'intervista.
   aggiunto. Sono i cambiamenti che sfuggono.
 - Riscrivi solo i campi cambiati, aggiorna la data in testa e aggiungi una riga in
   `## Storico`: `- {data} {cosa è cambiato}`.
-- Se cambia la criticità, dillo esplicitamente: cambia la severità di tutte e venti le figure.
+- Se cambia la criticità, dillo esplicitamente: cambia la severità di tutte le figure del modulo.
   Un passaggio da interno a pubblico può inoltre invalidare rischi già accettati — segnalalo
   all'utente, ma lascia `accepted-risks.md` alle figure.
 

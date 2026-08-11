@@ -32,15 +32,15 @@ uv run scripts/snapshot_diff.py --expected <inventario>.json --observed <mappa>.
 
 `--keys-only` è obbligatorio qui: inventario e mappa hanno per costruzione le stesse chiavi e valori diversi, perché l'uno descrive l'origine e l'altra la destinazione.
 
-Fai eseguire la verifica di merito a `grl-agent-wordpress`, che sa quali trasformazioni WordPress reggono e quali no, e verifica lo stato con `uv run scripts/check_delivery.py {delivery}`. Se una delle tre non regge, resta `blocked` con il disallineamento in `blockers`: non eseguire una migrazione parziale sperando di correggerla dopo. Se uno dei due script non è eseguibile, la validazione non è avvenuta e la migrazione non parte.
+Fai eseguire la verifica di merito a `grl-agent-wordpress` con la sua capacità `MG` (la scheda `migrazione-e-controlli.md` nelle sue reference), che dice quali trasformazioni WordPress reggono e quali no, e verifica lo stato con `uv run scripts/check_delivery.py {delivery}`. Se una delle tre non regge, resta `blocked` con il disallineamento in `blockers`: non eseguire una migrazione parziale sperando di correggerla dopo. Se uno dei due script non è eseguibile, la validazione non è avvenuta e la migrazione non parte.
 
 ## Esecuzione
 
 Solo dopo una validazione riuscita, e solo con autorizzazione esplicita registrata:
 
-- migra **prima sullo staging**, mai direttamente sul sito live;
+- migra **prima sullo staging**, mai direttamente sul sito live. Nelle due fasi il campo `target` dello stato porta l'ambiente su cui si sta lavorando: prima lo staging, poi — al cutover — il live. Il passaggio richiede un `authorization_scope` che nomini esplicitamente il live e si registra come nuova transizione, non come continuazione della precedente;
 - conserva gli slug indicizzati e l'identità degli elementi migrati: un contenuto che cambia identità è un contenuto perso per chi lo aveva linkato;
-- prepara il rollback **prima** del cutover e verificane la disponibilità, non solo l'esistenza;
+- prepara il rollback **prima** del cutover e verificane la disponibilità, non solo l'esistenza: la prova è un **restore dello snapshot eseguito sullo staging**, con l'esito scritto in `release-evidence.md` accanto alla voce del rollback. Uno snapshot mai ripristinato non è una via di ritorno;
 - i media contano come migrati solo dopo aver risolto e registrato i rispettivi attachment ID sul target: la presenza di un URL non è una prova;
 - non cancellare niente sul sito live prima del cutover. Una richiesta di «fare prima» cancellando in produzione si rifiuta e si spiega: il costo dell'ordine inverso è un sito rotto senza via di ritorno.
 

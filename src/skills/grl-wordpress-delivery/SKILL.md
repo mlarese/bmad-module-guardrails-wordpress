@@ -24,7 +24,9 @@ Esegui `uv run {project-root}/_bmad/scripts/resolve_config.py -p {project-root} 
 fallisce, leggi `{project-root}/_bmad/config.toml` e `{project-root}/_bmad/config.user.toml`. Usa
 `{output_folder}` o, se assente, `{project-root}/_bmad-output`. Leggi
 `{project-root}/_bmad/memory/grl-shared/project-profile.md` se c'è: settore, criticità e mercato
-tarano quanto in basso scende l'asticella dei controlli. Se manca, prosegui senza chiederlo.
+tarano **quanto insisti**, non quali controlli esegui. I tre gate restano obbligatori a qualsiasi
+criticità; cambia solo quanto in basso scende l'asticella dei rilievi che riporti. Se il profilo
+manca, prosegui senza chiederlo.
 
 Ricava l'intento dalla richiesta. Il nome del sito lo normalizza
 `uv run scripts/check_delivery.py --slugify "<nome>"`, ed è quella normalizzazione a definire
@@ -88,8 +90,11 @@ uv run scripts/delivery_write.py --write {delivery}/<file>.md --from <temporaneo
 uv run scripts/delivery_write.py --release {delivery}
 ```
 
-Se il lock è occupato, interrompi questa esecuzione: un'altra la sta aggiornando. Se la cartella non
-è creabile o scrivibile, resta `blocked` e non dichiarare persistenza.
+Se il lock è occupato, interrompi questa esecuzione: un'altra la sta aggiornando. Un lock **orfano**
+— lasciato da un'esecuzione morta — è un caso diverso: `delivery_write.py` lo riconosce con
+`--stale-after` e lo rileva con `--force-stale`. Usa `--force-stale` solo dopo aver verificato che
+nessuno stia scrivendo, e registra la ripresa nella cronologia della delivery. Se la cartella non è
+creabile o scrivibile, resta `blocked` e non dichiarare persistenza.
 
 Mantieni questi file, aggiornandoli solo con fatti osservati:
 
@@ -118,7 +123,9 @@ toglieva, e lo fa dove l'errore non si torna indietro.
 
 Invoca `grl-agent-wordpress` sul materiale reale per produrre o giudicare modello, piano,
 implementazione, migrazione, media e verifiche. Passagli il percorso della delivery, il target,
-l'intento e l'output richiesto; registra il risultato nei quattro artefatti. Se Milo non è
+l'intento e l'output richiesto; registra il risultato nei quattro artefatti — `content-model.md`,
+`component-plan.md`, `media-map.md` e `release-evidence.md` — o nei due che esistono con
+`intent: verify`. Se Milo non è
 disponibile, blocca il lavoro che richiede giudizio WordPress: questa skill non lo sostituisce.
 
 `create` e `migrate` pianificano per default. Possono modificare sito o repository solo dopo

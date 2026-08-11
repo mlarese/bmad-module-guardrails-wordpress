@@ -26,5 +26,6 @@ I template devono poter rappresentare almeno:
 Non creare un blocco custom per un solo titolo o pulsante se una Block Binding risolve il caso.
 Non infilare componenti propri nel contenuto libero se devono essere riusati in più template.
 
-Prima di proporre funzioni o requisiti dipendenti da versione, consulta la wiki OKF e la relativa
-pagina di fonte ufficiale.
+Prima di proporre funzioni o requisiti dipendenti da versione, consulta
+`references/okf-knowledge.md` e, se il progetto ha un bundle OKF, le sue pagine pertinenti; poi la
+fonte ufficiale corrente.

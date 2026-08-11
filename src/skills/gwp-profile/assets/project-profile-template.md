@@ -5,6 +5,7 @@ Aggiornato: {AAAA-MM-GG} · Scritto da: `gwp-profile` · Unico autore di questo 
 | Campo | Valore |
 | ----- | ------ |
 | Settore e dominio | {settore e dominio applicativo} |
+| Dimensione dell'organizzazione | {dipendenti · fatturato annuo · «non noto»} |
 | Tipo di software | {web app · sito/landing · API · mobile · tool interno · libreria · altro} |
 | Dati personali trattati | {categorie, oppure «nessuno»} |
 | Utenti e mercato | {UE / extra-UE · B2B / B2C · pubblico / interno} |

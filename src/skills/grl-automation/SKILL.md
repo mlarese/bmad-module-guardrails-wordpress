@@ -47,7 +47,8 @@ autorizzate; il gate che dipende dalla capability resta `blocked` o `EVIDENZA_IN
    ```
 
    Se fallisce, leggi `{project-root}/_bmad/config.toml` e `config.user.toml`, con italiano come
-   default.
+   default. `{output_folder}` arriva dalla stessa configurazione; se manca, vale
+   `{project-root}/_bmad-output`.
 2. Leggi, se esistono, `{project-root}/_bmad/memory/grl-shared/project-profile.md`,
    `domain-glossary.md`, `decisions.md` e `accepted-risks.md`. Se un file esiste ma è illeggibile o
    ha righe fuori formato, non inferirlo e non riscriverlo: dichiara il limite in una riga.
@@ -113,7 +114,7 @@ precondition: cosa deve essere vero prima
 approval: none | user | named-role
 risk: none | low | medium | high
 rollback: come annullare o correggere
-status: pending | blocked | ready
+status: uno degli stati di `references/execution-contract.md`
 ```
 
 Questi campi sono obbligatori anche quando il passo resta in `plan` o `read_only`; il record

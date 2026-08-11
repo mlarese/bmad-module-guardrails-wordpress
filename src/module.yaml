@@ -8,7 +8,7 @@
 code: gwp
 name: Guardrails WordPress
 description: "Presidio dell'architettura e della consegna WordPress a componenti: Gutenberg, Elementor confinato dove serve, ACF e campi custom, template e Media Library, con creazione, ripresa, migrazione e verifica fino al release gate."
-module_version: 1.35.9
+module_version: 1.36.0
 default_selected: false
 
 module_greeting: >
@@ -31,7 +31,7 @@ module_greeting: >
 # nello stesso progetto.
 
 post-install-notes: >
-  Primo passo: esegui `gwp-profile`. Sono otto campi, pochi minuti, quasi tutti
+  Primo passo: esegui `gwp-profile`. Sono nove campi, pochi minuti, quasi tutti
   pre-compilati leggendo il repository; l'unico che devi dichiarare tu è la criticità
   del progetto (hobby/prototipo · interno · produzione con clienti · regolamentato),
   perché è quella che regola quanto sarà severa ogni figura.

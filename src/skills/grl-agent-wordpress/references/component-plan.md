@@ -21,5 +21,6 @@ esempio e verifica. Evita di dividere artificialmente un componente che non ha u
 riusabile.
 
 Una consegna WordPress non è completa se contiene placeholder media, URL esterni temporanei o
-campi che l'editor non può aggiornare. Se l'accesso alla Media Library manca, separa chiaramente
-il codice pronto dall'operazione media ancora pendente e non segnare il lavoro come finito.
+campi che l'editor non può aggiornare. Se l'accesso alla Media Library manca, lo stato è **media pendente**: separa il codice pronto
+dall'operazione ancora da fare, con l'elenco nella forma di `references/media-library.md`, e non
+segnare il lavoro come finito.
