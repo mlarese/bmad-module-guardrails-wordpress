@@ -32,6 +32,7 @@ un paziente senza controllo umano.
 | Sito WordPress, contenuti e consegna | Milo + Iris, Nora, Kai, Bruno secondo il segnale | `grl-wordpress-delivery`, modello contenuti approvato, media con attachment ID, autorizzazione esplicita e release gate di `gwp-board` |
 | Revenue management, pricing e PMS | Rhea + Marta, Vera secondo il segnale | `grl-revenue-audit`, `grl-revenue-plan`, `grl-revenue-preflight`, dati riproducibili, floor economico, gate PMS/Channel Manager e rollback |
 | Configurazione di prodotto da documento del cliente | Ines + Aldo, Nils secondo il segnale | catalogo revisionato da una persona, validazione deterministica, origine dichiarata per ogni scelta, nessun invio a ERP o gestionale |
+| Backlog di issue GitHub da preparare o chiudere in sessione | Tito + Vera, Kai secondo il segnale | `grl-issues` per il registro datato, `grl-issue-readiness` per il verdetto di chiarezza, commento pubblicato solo dopo conferma, nessuna chiusura automatica |
 
 Se il progetto richiede una figura o una skill non installata, registra `missing_capability`,
 `handoff_status: pending`, nomina il modulo necessario e prosegui solo sulle parti ancora
@@ -199,6 +200,7 @@ silenzio.
 | tema, blocco, template, campo custom, media o consegna di un sito WordPress | Milo e `grl-wordpress-delivery` |
 | tariffa, KPI alberghiero, forecast, inventario, canale o invio a PMS/Channel Manager | Rhea, `grl-revenue-audit`, `grl-revenue-plan` e `grl-revenue-preflight` |
 | richiesta d'offerta, capitolato, opzioni di prodotto, compatibilità o catalogo di configurazione | Ines e `grl-agent-product-config` |
+| issue GitHub, backlog, triage, ticket poco chiaro o commento che chiede di aspettare | Tito, `grl-issues` e `grl-issue-readiness` |
 
 Il workflow coordina, non emette il parere dell'agente. Un handoff deve contenere domanda,
 artefatto, contesto, evidenza e decisione richiesta.
